@@ -1,4 +1,3 @@
-// server.js (Node.js backend)
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -8,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// MongoDB connection
+// connected to the data base (MongoDB)
 mongoose.connect('mongodb+srv://kuntalkumar789:kuntal98@cluster0.vigwezr.mongodb.net/zarektronix', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
