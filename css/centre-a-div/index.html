@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css practice</title>
+
+</head>
+<style>
+    #myDiv{
+        /* option 1 */
+        /* display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; */
+
+
+/* 
+option 2    
+            display: grid;
+            place-items: center;
+            height: 100vh;   */
+             /* Set the container's height to the full viewport height */
+
+
+/* option 3              */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+
+    }
+
+    button{
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        height: 30px;
+        width: 100px;
+
+    }
+  
+    body{
+        background-color: gray;
+    }
+</style>
+<body >
+    <div id="myDiv">
+        <button>Button</button>
+    </div>
+</body>
+</html>
