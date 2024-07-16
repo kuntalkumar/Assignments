@@ -1,0 +1,82 @@
+/* Sidebar.css */
+.parent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #333;
+  padding-top: 60px; /* Adjust as needed */
+  
+}
+.sidebar{
+
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(-200px);
+  width: 50px;
+
+}
+.sidebar.open {
+  transition: transform 0.5s ease-in-out;
+
+  transform: translateX(0);
+  width: 200px;
+
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+    font-size: 20px;
+  background: none;
+  border: none;
+  color: #b02222;
+  cursor: pointer;
+}
+#container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  padding: 10px 20px;
+  color: #fff;
+}
+
+.menu li:hover {
+  background-color: #555;
+}
+
+
+.bottom_menu{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.bottom_menu li{
+  padding: 10px 20px;
+  color: #fff;
+}
+
+.bottom_menu li:hover{
+  background-color: #555;
+
+}
+
+.userDetails{
+  background-color: #555;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: #fff;
+}

@@ -8,7 +8,6 @@ const initialState={
 const reducer = (state = initialState,action) => {
     switch(action.type){
         case 'ADD':
-
         return { ...state, counter: state.counter + action.payload };
         case 'REDUCE':
           return { ...state, counter: state.counter - action.payload };
@@ -18,6 +17,7 @@ const reducer = (state = initialState,action) => {
     }
 
 };
+
 
 export { reducer };
 

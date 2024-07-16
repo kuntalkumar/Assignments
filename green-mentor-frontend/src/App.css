@@ -4,7 +4,9 @@ body {
   margin: 0;
   padding: 0;
 }
-
+h2{
+  margin:auto;
+}
 /* Home.css */
 .home-container {
   text-align: center;

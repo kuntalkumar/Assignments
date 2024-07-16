@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Screen Share</title>
+    <style>
+        /* Style for user's screen share */
+        #userVideo {
+            width: 50%;
+            border: 2px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Screen Share</h1>
+    <video id="userVideo" autoplay></video>
+    <button id="start">Start Share Screen</button>
+    
+    <script>
+        document.getElementById('start').onclick = async () => {
+            const ws = new WebSocket('ws://localhost:5500');
+            ws.onopen = () => {
+                navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
+                    document.getElementById('userVideo').srcObject = stream;
+                    const mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = (event) => {
+                        if (event.data.size > 0) {
+                            ws.send(event.data);
+                        }
+                    };
+                    mediaRecorder.start();
+                }).catch((error) => {
+                    console.error('Error accessing screen:', error);
+                });
+            };
+        };
+    </script>
+</body>
+</html>

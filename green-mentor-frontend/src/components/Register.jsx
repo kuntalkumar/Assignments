@@ -18,12 +18,12 @@ function Register() {
         navigate('/login');
       })
       .catch(error => {
-        // Handle registration error
       });
   };
 
   return (
     <div className='register-container'>
+    <h2>Register </h2>
       <input type="text" required placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
       <input type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" required placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />

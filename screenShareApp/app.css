@@ -1,0 +1,11 @@
+/* Style for user's screen share */
+#userVideo {
+    width: 50%;
+    border: 2px solid #333;
+}
+
+/* Style for admin's screen view */
+#adminVideo {
+    width: 100%;
+    border: 2px solid #333;
+}

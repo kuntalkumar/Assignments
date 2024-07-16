@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Screen Share Viewer</title>
+    <style>
+        /* Style for admin's screen view */
+        #adminVideo {
+            width: 100%;
+            border: 2px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Screen Share Viewer</h1>
+    <video id="adminVideo" autoplay></video>
+
+    <script>
+        const adminVideo = document.getElementById('adminVideo');
+        const ws = new WebSocket('ws://localhost:5500');
+
+        ws.onopen = () => {
+            console.log('WebSocket connection established with server.');
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const blob = new Blob([event.data], { type: 'video/webm' });
+                adminVideo.src = URL.createObjectURL(blob);
+            } catch (error) {
+                console.error('Error processing video stream:', error);
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed.');
+        };
+    </script>
+</body>
+</html>
