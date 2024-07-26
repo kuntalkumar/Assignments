@@ -20,7 +20,16 @@ app.get("/", (req,res)=>{
     res.send("Api is Working ")
 })
 
-
+app.get("/userDetails",async(req,res)=>{
+    // const data=await UserModel.find()
+    try {
+        const data = await UserModel.find();
+        res.send(data); // Send the response after all data has been processed
+    } catch (error) {
+        res.status(500).send({ message: 'Error retrieving user details', error });
+    }
+   
+})
 app.post("/register",async (req,res)=>{
 
     const {name,email,password}=req.body;
