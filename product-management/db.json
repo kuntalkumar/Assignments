@@ -1,0 +1,37 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "stainless steel 304 Pipes",
+        "material": "stainless steel",
+        "grade": "304",
+        "shape": "",
+        "length": ""
+      },
+      {
+        "id": 2,
+        "name": "aluminium 6061 Sheets",
+        "material": "aluminium",
+        "grade": "6061",
+        "shape": "",
+        "length": ""
+      },
+      {
+        "id": 3,
+        "name": "copper C110 Pipes",
+        "material": "copper",
+        "grade": "C110",
+        "shape": "",
+        "length": ""
+      },
+      {
+        "id": 4,
+        "name": "stainless steel 316L Sheets",
+        "material": "stainless steel",
+        "grade": "316L",
+        "shape": "",
+        "length": ""
+      }
+    ]
+  }
+  
