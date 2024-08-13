@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Block 1",
       "description": "This is block 1",
-      "laneId": 1,
+      "laneId": 3,
       "history": [
         "Created"
       ]
@@ -13,7 +13,7 @@
       "id": 2,
       "name": "Block 2",
       "description": "This is block 2",
-      "laneId": 1,
+      "laneId": 2,
       "history": [
         "Created",
         "Moved to In Progress"
@@ -42,7 +42,7 @@
       "id": 5,
       "name": "Block 5",
       "description": "This is block 5",
-      "laneId": 2,
+      "laneId": 3,
       "history": [
         "Created",
         "Moved to In Progress"
@@ -62,7 +62,7 @@
       "id": 7,
       "name": "Block 7",
       "description": "This is block 7",
-      "laneId": 1,
+      "laneId": 2,
       "history": [
         "Created"
       ]
@@ -81,7 +81,7 @@
       "id": 9,
       "name": "Block 9",
       "description": "This is block 9",
-      "laneId": 3,
+      "laneId": 1,
       "history": [
         "Created",
         "Moved to Done"
