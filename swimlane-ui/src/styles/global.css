@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #875959;
+  }
+  
+  .app {
+    display: flex;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  

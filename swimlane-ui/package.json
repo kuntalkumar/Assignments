@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/material": "^5.16.7",
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "ajv": "^8.17.1",
+    "framer-motion": "^11.3.24",
+    "json": "^11.0.0",
     "material-ui": "^0.20.2",
     "react": "^18.3.1",
     "react-dnd": "^16.0.1",
@@ -19,7 +24,9 @@
     "react-redux": "^9.1.2",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "server": "^1.0.39",
+    "web-vitals": "^2.1.4",
+    "whatwg-fetch": "^3.6.20"
   },
   "scripts": {
     "start": "react-scripts start",

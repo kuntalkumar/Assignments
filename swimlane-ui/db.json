@@ -1,51 +1,91 @@
 {
-  "lanes": [
-    { "id": 1, "name": "To Do" },
-    { "id": 2, "name": "In Progress" },
-    { "id": 3, "name": "Done" }
-  ],
   "blocks": [
     {
       "id": 1,
       "name": "Block 1",
       "description": "This is block 1",
       "laneId": 1,
-      "history": ["Created"]
+      "history": [
+        "Created"
+      ]
     },
     {
       "id": 2,
       "name": "Block 2",
       "description": "This is block 2",
-      "laneId": 2,
-      "history": ["Created", "Moved to In Progress"]
+      "laneId": 1,
+      "history": [
+        "Created",
+        "Moved to In Progress"
+      ]
     },
     {
       "id": 3,
       "name": "Block 3",
       "description": "This is block 3",
-      "laneId": 3,
-      "history": ["Created", "Moved to Done"]
+      "laneId": 2,
+      "history": [
+        "Created",
+        "Moved to Done"
+      ]
     },
     {
       "id": 4,
       "name": "Block 4",
       "description": "This is block 4",
       "laneId": 1,
-      "history": ["Created"]
+      "history": [
+        "Created"
+      ]
     },
     {
       "id": 5,
       "name": "Block 5",
       "description": "This is block 5",
       "laneId": 2,
-      "history": ["Created", "Moved to In Progress"]
+      "history": [
+        "Created",
+        "Moved to In Progress"
+      ]
     },
     {
       "id": 6,
       "name": "Block 6",
       "description": "This is block 6",
       "laneId": 3,
-      "history": ["Created", "Moved to Done"]
+      "history": [
+        "Created",
+        "Moved to Done"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Block 7",
+      "description": "This is block 7",
+      "laneId": 1,
+      "history": [
+        "Created"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Block 8",
+      "description": "This is block 8",
+      "laneId": 2,
+      "history": [
+        "Created",
+        "Moved to In Progress"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Block 9",
+      "description": "This is block 9",
+      "laneId": 3,
+      "history": [
+        "Created",
+        "Moved to Done"
+      ]
     }
   ]
 }

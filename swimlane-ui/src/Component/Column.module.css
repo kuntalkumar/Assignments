@@ -1,0 +1,22 @@
+.column {
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .topSection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .bottomSection {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
