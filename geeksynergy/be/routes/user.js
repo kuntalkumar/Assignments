@@ -1,4 +1,3 @@
-// routes/users.js
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -57,6 +56,17 @@ router.put('/:id', async (req, res) => {
 
     await user.save();
     res.json({ message: 'User updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    res.json({ message: 'User deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
