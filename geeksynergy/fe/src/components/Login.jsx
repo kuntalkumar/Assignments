@@ -10,7 +10,8 @@ function Login() {
   });
   const [message, setMessage] = useState('');
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,36 +23,66 @@ function Login() {
         localStorage.setItem('token', response.data.token);
         setMessage('Login successful');
         // Redirect to homepage
-        navigate("./homepage")
+        navigate("/homepage");
       })
       .catch(error => setMessage('Error logging in'));
   };
 
   return (
-    <div className="container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" name="email" className="form-control" onChange={handleChange} />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow-sm border-0">
+            <div className="card-body p-4">
+              <h2 className="text-center mb-4">Login</h2>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group mb-3">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="Enter your email"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group mb-4">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    className="form-control"
+                    placeholder="Enter your password"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary w-100 mb-3">
+                  Login
+                </button>
+              </form>
+              {message && (
+                <div className="text-center mt-3">
+                  <p className={message.includes('successful') ? 'text-success' : 'text-danger'}>
+                    {message}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => navigate("/register")}
+                    className="btn btn-secondary w-100"
+                  >
+                    Register
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" name="password" className="form-control" onChange={handleChange} />
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-        
-      </form>
-     
-
-      {message &&<div>
-        <p>{message}</p>
-      <button type="submit" onClick={()=>{
-        navigate("./register")
-      }}  className="btn btn-primary">Register</button>
-      </div> }
-
       </div>
+    </div>
   );
 }
 
