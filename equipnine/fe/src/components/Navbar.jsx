@@ -20,7 +20,7 @@ const Navbar = ({ isLoggedIn, userName }) => {
         <Flex alignItems="center">
           {isLoggedIn && location.pathname === '/dashboard' ? (
             <>
-              <Text mx={2}> {userName[0]}</Text>
+              {/* <Text mx={2}> {userName[0]}</Text> */}
               <Button onClick={handleLogout} mx={2} colorScheme="teal">
                 Logout
               </Button>

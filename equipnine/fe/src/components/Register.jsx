@@ -20,7 +20,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('http://localhost:8080/register', data);
+      await axios.post('https://equip9-be.onrender.com/register', data);
       toast({
         title: 'Registration Successful',
         description: `Welcome, ${data.firstName} ${data.lastName}!`,

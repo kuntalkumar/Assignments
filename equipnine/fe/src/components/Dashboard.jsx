@@ -12,7 +12,7 @@ const Dashboard = ({ userId }) => {
       try {
         const token = localStorage.getItem('token');
         if (token && userId) {
-          const response = await axios.get(`http://localhost:8080/user/${userId}`, {
+          const response = await axios.get(`https://equip9-be.onrender.com/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
