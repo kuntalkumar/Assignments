@@ -20,6 +20,8 @@ const App = () => {
           element={<Login setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} setUserId={setUserId} />}
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Register />} />
+
       </Routes>
     </Router>
   );
