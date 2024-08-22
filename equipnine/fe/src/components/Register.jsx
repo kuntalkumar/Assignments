@@ -11,35 +11,32 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
-  const [profilePictureURL, setProfilePictureURL] = useState('');
   const toast = useToast();
 
   const onSubmit = async (data) => {
-    console.log({ ...data, profilePicture: profilePictureURL || profilePicture });
-    toast({
-      title: 'Registration Successful',
-      description: `Welcome, ${data.firstName} ${data.lastName}!`,
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    });
-  };
-
-  const handleFileChange = (e) => {
-    if (e.target.files.length > 0) {
-      setProfilePicture(URL.createObjectURL(e.target.files[0]));
-      setProfilePictureURL(''); // Clear the manual URL when a file is selected
+    try {
+      await axios.post('http://localhost:8080/register', data);
+      toast({
+        title: 'Registration Successful',
+        description: `Welcome, ${data.firstName} ${data.lastName}!`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: 'Registration Failed',
+        description: error.response ? error.response.data.message : 'An error occurred',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
     }
-  };
-
-  const handleURLChange = (e) => {
-    setProfilePictureURL(e.target.value);
-    setProfilePicture(null); // Clear the file input when a URL is entered
   };
 
   return (
@@ -79,6 +76,15 @@ const Register = () => {
             />
           </FormControl>
 
+          <FormControl>
+            <FormLabel>Profile Picture URL</FormLabel>
+            <Input
+              type="text"
+              placeholder="Enter profile picture URL"
+              {...register('profilePicture')}
+            />
+          </FormControl>
+
           <FormControl isInvalid={errors.password}>
             <FormLabel>Password</FormLabel>
             <InputGroup>
@@ -93,29 +99,6 @@ const Register = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Profile Picture</FormLabel>
-            <Input
-              type="text"
-              placeholder="Enter image URL or leave blank"
-              value={profilePictureURL}
-              onChange={handleURLChange}
-            />
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              mt={2}
-            />
-            {(profilePictureURL || profilePicture) && (
-              <img
-                src={profilePictureURL || profilePicture}
-                alt="Profile Preview"
-                style={{ marginTop: '10px', maxWidth: '100px', maxHeight: '100px' }}
-              />
-            )}
           </FormControl>
 
           <Button type="submit" colorScheme="teal" width="full">
