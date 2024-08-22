@@ -1,46 +1,44 @@
-# MERN: Full Stack Hands-on Test
-## Deployment Links 
-<a href="https://endearing-donut-f2abcb.netlify.app" target="/n">Frontend</a> - https://endearing-donut-f2abcb.netlify.app
+# MERN Stack Full Stack Hands-on Test
 
-<a href="https://equip9-be.onrender.com" target="/n">Backend</a> - https://equip9-be.onrender.com
+## Project Overview
 
+This project is a full-stack web application built using the MERN stack (MongoDB, Express, React, Node.js). The application includes a user registration and login system with support for profile pictures, stored in MongoDB as a URL. It is styled using Chakra UI with both light and dark mode options.
 
+### Deployment Links
 
-## Create a Registration Page Screen. With Following Fields
-1. First Name
-2. Last Name
-3. Mobile Number (Take any 10 digits for demo purpose)
-4. Password
-5. Profile Picture -  (Stored on Mongodb database in the form of URL)
+- **Frontend**: [endearing-donut-f2abcb.netlify.app](https://endearing-donut-f2abcb.netlify.app)
+- **Backend**: [equip9-be.onrender.com](https://equip9-be.onrender.com)
 
-## For CSS colour combination uses chakra UI 
-Additionally implemented - 
-        ## Dark mode and Light mode
+### Features
 
-## Above mention details are store in mongoDB collection 
+- **User Registration**: Users can register with the following fields:
+  - First Name
+  - Last Name
+  - Mobile Number (10 digits)
+  - Password
+  - Profile Picture (stored as a URL in MongoDB)
 
-## Created Rest API with following HTTP verb:
-1. Post API to Create record in table
-2. Get API to retrieve the record from the table.
-3. PUT API to update if needed.
-4. DELETE API to delete the record.
+- **User Login**: 
+  - Users can log in using their mobile number and password.
+  - On successful login, users are redirected to a personalized landing page with a greeting message based on the time of day.
+  - The landing page displays the user's image, name, and mobile number.
 
-## If registration is complete and if entry is created successfully then
-a. Redirect the user to the login page.
-b. On Login page
-i. Prompt the Mobile Number and Password.
-ii. Match the password and generate the on-access token decide the
-authenticity of user.
-iii. If user is validated then land him to blank landing page stating “Good
-Morning/ Afternoon/ or Evening (based on the time) Mr. First Name, Last
-Name”
-iv. His Image, Name, And Mobile Number will be visible with a welcome
-note on UI.
+- **Responsive Design**: The application is fully responsive, ensuring a seamless experience across different devices.
 
+- **Dark Mode and Light Mode**: The application supports both dark and light modes, enhancing the user experience.
 
+### REST API Endpoints
 
-   
+The backend API supports the following operations:
 
+1. **Create (POST)**: Creates a new user record in the database.
+2. **Retrieve (GET)**: Fetches a user record from the database.
+3. **Update (PUT)**: Updates an existing user record in the database.
+4. **Delete (DELETE)**: Deletes a user record from the database.
 
+### Tech Stack
 
-
+- **Frontend**: React.js with Chakra UI for styling
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Deployment**: Netlify (Frontend), Render (Backend)
