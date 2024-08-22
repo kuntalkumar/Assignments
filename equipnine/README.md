@@ -1,6 +1,8 @@
 # MERN: Full Stack Hands-on Test
 ## Deployment Links 
        Frontend - [https://endearing-donut-f2abcb.netlify.app/]
+       <a href="https://endearing-donut-f2abcb.netlify.app" target="_blank">Frontend</a>
+
        Backend - [https://equip9-be.onrender.com]
 
 ## Create a Registration Page Screen. With Following Fields
