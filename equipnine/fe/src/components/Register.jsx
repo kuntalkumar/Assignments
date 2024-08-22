@@ -15,10 +15,12 @@ import { useForm } from 'react-hook-form';
 const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [profilePictureURL, setProfilePictureURL] = useState('');
   const toast = useToast();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    console.log({ ...data, profilePicture: profilePictureURL || profilePicture });
     toast({
       title: 'Registration Successful',
       description: `Welcome, ${data.firstName} ${data.lastName}!`,
@@ -26,6 +28,18 @@ const Register = () => {
       duration: 5000,
       isClosable: true,
     });
+  };
+
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      setProfilePicture(URL.createObjectURL(e.target.files[0]));
+      setProfilePictureURL(''); // Clear the manual URL when a file is selected
+    }
+  };
+
+  const handleURLChange = (e) => {
+    setProfilePictureURL(e.target.value);
+    setProfilePicture(null); // Clear the file input when a URL is entered
   };
 
   return (
@@ -65,21 +79,6 @@ const Register = () => {
             />
           </FormControl>
 
-          <FormControl isInvalid={errors.email}>
-            <FormLabel>Email Address</FormLabel>
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: 'Invalid email address',
-                },
-              })}
-            />
-          </FormControl>
-
           <FormControl isInvalid={errors.password}>
             <FormLabel>Password</FormLabel>
             <InputGroup>
@@ -94,6 +93,29 @@ const Register = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Profile Picture</FormLabel>
+            <Input
+              type="text"
+              placeholder="Enter image URL or leave blank"
+              value={profilePictureURL}
+              onChange={handleURLChange}
+            />
+            <Input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              mt={2}
+            />
+            {(profilePictureURL || profilePicture) && (
+              <img
+                src={profilePictureURL || profilePicture}
+                alt="Profile Preview"
+                style={{ marginTop: '10px', maxWidth: '100px', maxHeight: '100px' }}
+              />
+            )}
           </FormControl>
 
           <Button type="submit" colorScheme="teal" width="full">

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Button, Input, FormControl, FormLabel, Text, VStack, useToast } from '@chakra-ui/react';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn, setUserName }) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,6 +18,8 @@ const Login = () => {
         password,
       });
       localStorage.setItem('token', response.data.token);
+      setIsLoggedIn(true);
+      setUserName(response.data.userName); // Ensure this is sent from the backend
       navigate('/dashboard');
     } catch (error) {
       setError('Invalid mobile number or password');
