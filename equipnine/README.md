@@ -1,8 +1,8 @@
 # MERN: Full Stack Hands-on Test
 ## Deployment Links 
-<a href="https://endearing-donut-f2abcb.netlify.app" target="/n">Frontend</a>
+<a href="https://endearing-donut-f2abcb.netlify.app" target="/n">Frontend</a> - https://endearing-donut-f2abcb.netlify.app
 
-<a href="https://equip9-be.onrender.com" target="/n">Backend</a>
+<a href="https://equip9-be.onrender.com" target="/n">Backend</a> - https://equip9-be.onrender.com
 
 
 
