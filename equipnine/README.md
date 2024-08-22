@@ -1,7 +1,9 @@
 # MERN: Full Stack Hands-on Test
+## Deployment Links 
+       Frontend - [https://endearing-donut-f2abcb.netlify.app/]
+       Backend - [https://equip9-be.onrender.com]
 
-## Step 1:
-Create a Registration Page Screen. With Following Fields
+## Create a Registration Page Screen. With Following Fields
 1. First Name
 2. Last Name
 3. Mobile Number (Take any 10 digits for demo purpose)
