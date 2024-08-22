@@ -2,6 +2,20 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
+
+const getUserData = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password'); // Exclude password
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching user data', error });
+  }
+};
+
 const registerUser = async (req, res) => {
   const { firstName, lastName, mobileNumber, password, profilePicture } = req.body;
 
@@ -52,4 +66,4 @@ const getTimeOfDay = () => {
   return 'Evening';
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser,getUserData };
