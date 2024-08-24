@@ -1,0 +1,4 @@
+{
+    "connectionString": "mongodb+srv://kuntalkumar789:kuntal98@cluster0.vigwezr.mongodb.net/rbacapp",
+    "secret": "123456"
+  }
