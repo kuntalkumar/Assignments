@@ -4,7 +4,8 @@ const User = () => {
   const [data, setData] = useState([]);
   const [imp, setImp] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
   const api = 'http://localhost:3000/data';
 
@@ -12,6 +13,7 @@ const User = () => {
     let res = await fetch(api);
     let apiData = await res.json();
     setData(apiData);
+    setFilteredData(apiData); // Initially set filteredData to full data
   };
 
   useEffect(() => {
@@ -19,8 +21,6 @@ const User = () => {
   }, []);
 
   const useSearch = (data, query, genderFilter, sortOrder) => {
-    const [filteredData, setFilteredData] = useState(data);
-
     useEffect(() => {
       let result = data;
 
@@ -46,11 +46,10 @@ const User = () => {
 
       setFilteredData(result);
     }, [data, query, genderFilter, sortOrder]);
-
-    return filteredData;
   };
 
-  const filteredData = useSearch(data, imp, genderFilter, sortOrder);
+  // Use the search and filter logic only when the user interacts with the input fields
+  useSearch(data, imp, genderFilter, sortOrder);
 
   return (
     <div>
@@ -75,8 +74,9 @@ const User = () => {
           setSortOrder(e.target.value);
         }}
       >
-        <option value="asc">Sort by Salary: Low to High</option>
-        <option value="desc">Sort by Salary: High to Low</option>
+        <option value="">Sort by Salary</option>
+        <option value="asc">Low to High</option>
+        <option value="desc">High to Low</option>
       </select>
       <table>
         <thead>
@@ -89,7 +89,7 @@ const User = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredData?.map((ele) => (
+          {(filteredData.length ? filteredData : data)?.map((ele) => (
             <tr key={ele.id}>
               <td>{ele.id}</td>
               <td>{ele.first_name + ' ' + ele.last_name}</td>
