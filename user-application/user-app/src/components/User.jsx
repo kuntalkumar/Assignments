@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { Button, Input, Select, Table, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@chakra-ui/react';
 
 const User = () => {
   const [data, setData] = useState([]);
@@ -8,10 +9,11 @@ const User = () => {
   const [genderFilter, setGenderFilter] = useState('');
   const [sortOrder, setSortOrder] = useState('');
   const [filteredData, setFilteredData] = useState([]);
-  const [editUser, setEditUser] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', gender: '', salary: '' });
+  const [editUser, setEditUser] = useState(null);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
   const api = 'http://localhost:3000/data';
 
   const fetchData = async () => {
@@ -61,14 +63,14 @@ const User = () => {
       gender: user.gender,
       salary: user.salary
     });
-    setIsEditing(true);
+    onOpen();
   };
 
   const handleDelete = async (id) => {
     await fetch(`${api}/${id}`, {
       method: 'DELETE',
     });
-    fetchData(); // Refresh the data after deletion
+    fetchData();
   };
 
   const handleSave = async () => {
@@ -81,8 +83,8 @@ const User = () => {
         body: JSON.stringify(formData)
       });
       setEditUser(null);
-      setIsEditing(false);
-      fetchData(); // Refresh the data after editing
+      onClose();
+      fetchData(); 
     }
   };
 
@@ -95,94 +97,113 @@ const User = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
+    <div style={{ margin: '20px' }}>
+      <Input
         placeholder="Search by employee name"
         onChange={(e) => setImp(e.target.value)}
+        mb={4}
+        style={{ marginBottom: '15px' }}
       />
-      <select
+      <Select
+        placeholder="Filter by Gender"
         onChange={(e) => setGenderFilter(e.target.value)}
+        mb={4}
+        style={{ marginBottom: '15px' }}
       >
-        <option value="">All Genders</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
-      </select>
-      <select
+      </Select>
+      <Select
+        placeholder="Sort by Salary"
         onChange={(e) => setSortOrder(e.target.value)}
+        mb={4}
+        style={{ marginBottom: '15px' }}
       >
-        <option value="">Sort by Salary</option>
-        <option value="asc">Low to High</option>
+         <option value="asc">Low to High</option>
         <option value="desc">High to Low</option>
-      </select>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Salary</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
+      </Select>
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            <Th>Id</Th>
+            <Th>Name</Th>
+            <Th>Email</Th>
+            <Th>Gender</Th>
+            <Th>Salary</Th>
+            <Th>Edit</Th>
+            <Th>Delete</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           {(filteredData.length ? filteredData : data)?.map((ele) => (
-            <tr key={ele.id}>
-              <td>{ele.id}</td>
-              <td>{ele.first_name + ' ' + ele.last_name}</td>
-              <td>{ele.email}</td>
-              <td>{ele.gender}</td>
-              <td>{ele.salary}</td>
-              <td>
-                <FontAwesomeIcon icon={faPenToSquare} onClick={() => handleEdit(ele)} />
-              </td>
-              <td>
-                <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(ele.id)} />
-              </td>
-            </tr>
+            <Tr key={ele.id} _hover={{ bg: '#f1f1f1' }}>
+              <Td>{ele.id}</Td>
+              <Td>{ele.first_name + ' ' + ele.last_name}</Td>
+              <Td>{ele.email}</Td>
+              <Td>{ele.gender}</Td>
+              <Td>{ele.salary}</Td>
+              <Td>
+                <FontAwesomeIcon icon={faPenToSquare} onClick={() => handleEdit(ele)} style={{ cursor: 'pointer' }} />
+              </Td>
+              <Td>
+                <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(ele.id)} style={{ cursor: 'pointer' }} />
+              </Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
 
-      {isEditing && (
-        <div>
-          <h3>Edit User</h3>
-          <input
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-            placeholder="First Name"
-          />
-          <input
-            name="last_name"
-            value={formData.last_name}
-            onChange={handleChange}
-            placeholder="Last Name"
-          />
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-          />
-          <input
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            placeholder="Gender"
-          />
-          <input
-            name="salary"
-            value={formData.salary}
-            onChange={handleChange}
-            placeholder="Salary"
-          />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
-        </div>
-      )}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader bg="#559dbd" color="white">Edit User</ModalHeader>
+          <ModalBody>
+            <Input
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              placeholder="First Name"
+              mb={3}
+            />
+            <Input
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              placeholder="Last Name"
+              mb={3}
+            />
+            <Input
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              mb={3}
+            />
+            <Input
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              placeholder="Gender"
+              mb={3}
+            />
+            <Input
+              name="salary"
+              value={formData.salary}
+              onChange={handleChange}
+              placeholder="Salary"
+              mb={3}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleSave}>
+              Save
+            </Button>
+            <Button variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
