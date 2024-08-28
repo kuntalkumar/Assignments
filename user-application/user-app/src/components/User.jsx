@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { Button, Input, Select, Table, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@chakra-ui/react';
+import { Button, Input, Select, Table, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Heading } from '@chakra-ui/react';
 
 const User = () => {
   const [data, setData] = useState([]);
@@ -98,16 +98,15 @@ const User = () => {
 
   return (
     <div style={{ margin: '20px' }}>
-      <Input
+    <div style={{display:"flex"}}>
+    <Input
         placeholder="Search by employee name"
         onChange={(e) => setImp(e.target.value)}
-        mb={4}
         style={{ marginBottom: '15px' }}
       />
       <Select
         placeholder="Filter by Gender"
         onChange={(e) => setGenderFilter(e.target.value)}
-        mb={4}
         style={{ marginBottom: '15px' }}
       >
         <option value="Male">Male</option>
@@ -116,12 +115,12 @@ const User = () => {
       <Select
         placeholder="Sort by Salary"
         onChange={(e) => setSortOrder(e.target.value)}
-        mb={4}
         style={{ marginBottom: '15px' }}
       >
          <option value="asc">Low to High</option>
         <option value="desc">High to Low</option>
       </Select>
+    </div>
       <Table variant="simple">
         <Thead>
           <Tr>
@@ -153,49 +152,44 @@ const User = () => {
         </Tbody>
       </Table>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader bg="#559dbd" color="white">Edit User</ModalHeader>
-          <ModalBody>
+          <ModalBody style={{height:"200px"}} bg="#559dbd" color="white">
             <Input
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
               placeholder="First Name"
-              mb={3}
             />
             <Input
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
               placeholder="Last Name"
-              mb={3}
             />
             <Input
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              mb={3}
             />
             <Input
               name="gender"
               value={formData.gender}
               onChange={handleChange}
               placeholder="Gender"
-              mb={3}
             />
             <Input
               name="salary"
               value={formData.salary}
               onChange={handleChange}
               placeholder="Salary"
-              mb={3}
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleSave}>
+            <Button colorScheme="blue" onClick={handleSave}>
               Save
             </Button>
             <Button variant="outline" onClick={onClose}>
