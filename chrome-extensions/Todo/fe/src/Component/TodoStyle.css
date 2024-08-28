@@ -1,0 +1,4 @@
+ul,.tasksList{
+    display: flex;
+    justify-content: space-between;
+}
