@@ -1,0 +1,44 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #7f7fdb;
+    color: #4b0465;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 20px; */
+
+}
+
+#jokeselement {
+    background-color:  #7f7fdb;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(239, 233, 233, 0.1);
+    font-size: 1.5rem;
+    text-align: center;
+    max-width: 600px;
+    width:  400px;
+    margin: 0 auto;
+}
+
+#jokeselement {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
