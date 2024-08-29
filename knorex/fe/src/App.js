@@ -126,18 +126,18 @@ function App() {
                 <Checkbox
   isChecked={selectedUsers.includes(user._id)}
   onChange={() => handleSelectUser(user._id)}
-  colorScheme="teal" // Sets the checkbox color when checked
+  colorScheme="teal" 
   sx={{
     '& .chakra-checkbox__control': {
-      backgroundColor: 'white', // Default background color
-      borderColor: 'gray.300', // Default border color
+      backgroundColor: 'white', 
+      borderColor: 'gray.300', 
     },
     '& .chakra-checkbox__control[data-checked]': {
-      backgroundColor: 'teal.500', // Background color when checked
-      borderColor: 'teal.500', // Border color when checked
+      backgroundColor: 'teal.500', 
+      borderColor: 'teal.500',
     },
     '& .chakra-checkbox__icon': {
-      color: 'white', // Color of the checkmark
+      color: 'white', 
     },
   }}
 />
