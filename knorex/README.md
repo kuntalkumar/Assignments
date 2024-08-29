@@ -9,8 +9,8 @@ The User Management System is a full-stack application that includes:
 - **Database**: MongoDB for storing user data.
 
 ## Deployed Link
-  FrontEnd- [https://66d04487751318d89b6353c4--spectacular-alpaca-3af40c.netlify.app/]
-  BackEnd- [https://knorex-be.onrender.com/]
+ - **FrontEnd** - [https://66d04487751318d89b6353c4--spectacular-alpaca-3af40c.netlify.app/]
+ - **BackEnd**  - [https://knorex-be.onrender.com/]
 
 ## Project Structure
 
