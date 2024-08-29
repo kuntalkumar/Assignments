@@ -58,7 +58,7 @@ The User Management System is a full-stack application that includes:
         "email": "String",
         "password": "String"
       }
-      // Additional user objects
+    
     ]
     ```
 
