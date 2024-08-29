@@ -1,7 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, Button, Box, Table, Thead, Tbody, Tr, Th, Td, Checkbox, Spinner } from '@chakra-ui/react';
+import {
+  Button,
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Checkbox,
+  Spinner,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
+  Flex,
+  Heading,
+  Text,
+} from '@chakra-ui/react';
+import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import SignUpForm from './components/SighnUpForm.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation';
+import "./App.css"
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -11,22 +30,28 @@ function App() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
 
+  const { toggleColorMode } = useColorMode();
+  const navbarBg = useColorModeValue('teal.500', 'teal.800');
+  // const navbarBg = useColorModeValue('teal.500', 'teal.800');
+  const navbarTextColor = useColorModeValue('white', 'gray.200');
+  const pageBg = useColorModeValue('#E6F7FF', 'gray.900');  
+  const tableBg = useColorModeValue('#CCE7FF', 'gray.800'); 
+  const tableTextColor = useColorModeValue('gray.800', 'gray.200'); 
+  const checkBoxColor = useColorModeValue('red', 'gray.200'); 
+
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch('https://knorex-be.onrender.com/alluser');
+      const response = await fetch(`https://knorex-be.onrender.com/alluser`);
       const data = await response.json();
       setUsers(data);
     };
-console.log(users)
     fetchUsers();
-  }, [loading,isSignUpOpen]);
+  }, [loading, isSignUpOpen]);
 
   const handleSelectUser = (id) => {
-
     setSelectedUsers((prevSelected) =>
       prevSelected.includes(id) ? prevSelected.filter((userId) => userId !== id) : [...prevSelected, id]
     );
-
   };
 
   const handleDeleteUser = async (id) => {
@@ -35,7 +60,6 @@ console.log(users)
     setUsers(users.filter((user) => user.id !== id));
     setLoading(false);
     setIsDeleteOpen(false);
-
   };
 
   const handleExport = async () => {
@@ -61,47 +85,66 @@ console.log(users)
   };
 
   return (
-    <div>
+    <Box bg={pageBg} minHeight="100vh" p={4}>
+      <Flex justify="space-between" align="center" bg={navbarBg} p={4} borderRadius="md" mb={6} boxShadow="md">
+        <Heading color={navbarTextColor} size="lg">User Management</Heading>
+        <Flex align="center">
+          <IconButton
+            aria-label="Toggle light/dark mode"
+            icon={useColorModeValue(<MoonIcon />, <SunIcon />)}
+            onClick={toggleColorMode}
+            mr={4}
+            colorScheme="yellow"
+          />
+          {loading && <Spinner size="lg" color="white" mr={4} />}
+          <Button colorScheme="blue" onClick={() => setIsSignUpOpen(true)}>SIGN UP</Button>
+          <Button
+            colorScheme="green"
+            onClick={handleExport}
+            isDisabled={selectedUsers.length === 0}
+            ml={2}
+          >
+            EXPORT
+          </Button>
+        </Flex>
+      </Flex>
 
- 
-      <Box p={4}>
-        <Button colorScheme="blue" onClick={() => setIsSignUpOpen(true)}>SIGN UP</Button>
-        <Button
-          colorScheme="green"
-          onClick={handleExport}
-          isDisabled={selectedUsers.length === 0}
-          ml={2}
-        >
-          EXPORT
-        </Button>
-
-        {loading && <Spinner size="lg" />}
-
-        <Table mt={4}>
+      <Box bg={tableBg} p={4} borderRadius="md" boxShadow="md">
+        <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Select</Th>
-              <Th>First Name</Th>
-              <Th>Last Name</Th>
-              <Th>Email</Th>
-              <Th>Actions</Th>
+              <Th color={tableTextColor}>Select</Th>
+              <Th color={tableTextColor}>Full Name</Th>
+              <Th color={tableTextColor}>Email</Th>
+              <Th color={tableTextColor}>Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
-
-
-
             {users?.map((user) => (
               <Tr key={user._id}>
                 <Td>
-                  <Checkbox
-                    isChecked={selectedUsers.includes(user._id)}
-                    onChange={() => handleSelectUser(user._id)}
-                  />
+                <Checkbox
+  isChecked={selectedUsers.includes(user._id)}
+  onChange={() => handleSelectUser(user._id)}
+  colorScheme="teal" // Sets the checkbox color when checked
+  sx={{
+    '& .chakra-checkbox__control': {
+      backgroundColor: 'white', // Default background color
+      borderColor: 'gray.300', // Default border color
+    },
+    '& .chakra-checkbox__control[data-checked]': {
+      backgroundColor: 'teal.500', // Background color when checked
+      borderColor: 'teal.500', // Border color when checked
+    },
+    '& .chakra-checkbox__icon': {
+      color: 'white', // Color of the checkmark
+    },
+  }}
+/>
+
                 </Td>
-                <Td>{user.firstName}</Td>
-                <Td>{user.lastName}</Td>
-                <Td>{user.email}</Td>
+                <Td color={tableTextColor}>{user.firstName + " " + user.lastName}</Td>
+                <Td color={tableTextColor}>{user.email}</Td>
                 <Td>
                   <Button 
                     colorScheme="red" 
@@ -111,7 +154,6 @@ console.log(users)
                     }}>
                     DELETE
                   </Button>
-
                 </Td>
               </Tr>
             ))}
@@ -119,18 +161,14 @@ console.log(users)
         </Table>
       </Box>
 
-
-
       <SignUpForm isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)} setUsers={setUsers} />
       <DeleteConfirmation 
         isOpen={isDeleteOpen} 
         onClose={() => setIsDeleteOpen(false)} 
         onDelete={() => handleDeleteUser(userIdToDelete)} 
       />
-
-
-      </div>
-
+    </Box>
   );
 }
+
 export default App;
