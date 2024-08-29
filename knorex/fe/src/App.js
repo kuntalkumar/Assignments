@@ -42,7 +42,7 @@ console.log(users)
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const selectedUserData = users.filter((user) => selectedUsers.includes(user.id));
+    const selectedUserData = users.filter((user) => selectedUsers.includes(user._id));
     const csvContent = `id,email,first_name,last_name\n${selectedUserData
       .map((user) => `${user._id},${user.email},${user.firstName},${user.lastName}`)
       .join('\n')}`;
@@ -111,6 +111,7 @@ console.log(users)
                     }}>
                     DELETE
                   </Button>
+
                 </Td>
               </Tr>
             ))}
@@ -118,12 +119,16 @@ console.log(users)
         </Table>
       </Box>
 
+
+
       <SignUpForm isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)} setUsers={setUsers} />
       <DeleteConfirmation 
         isOpen={isDeleteOpen} 
         onClose={() => setIsDeleteOpen(false)} 
         onDelete={() => handleDeleteUser(userIdToDelete)} 
       />
+
+
       </div>
 
   );

@@ -24,7 +24,6 @@ function SignUpForm({ isOpen, onClose, setUsers }) {
   };
 
   const handleSubmit = async () => {
-    // Simple form validation
     if (!formData.email.includes('@') || formData.password.length < 6) {
       toast({
         title: 'Invalid input',
@@ -61,7 +60,7 @@ function SignUpForm({ isOpen, onClose, setUsers }) {
       });
 
       onClose();
-      
+
     } catch (error) {
       toast({
         title: 'Sign up failed',
@@ -94,7 +93,7 @@ function SignUpForm({ isOpen, onClose, setUsers }) {
           </FormControl>
           <FormControl mb={4}>
             <FormLabel>Password</FormLabel>
-            <Input type="password" name="password" value={formData.password} onChange={handleChange} />
+            <Input type="password" name="password"  value={formData.password} onChange={handleChange} />
           </FormControl>
         </ModalBody>
         <ModalFooter>
