@@ -1,53 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-import Message from './Message';
-
-const socket = io('http://localhost:5000');
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import Chat from './components/Chat';
 
 function App() {
-  const [messages, setMessages] = useState([]);
-  const [messageText, setMessageText] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  useEffect(() => {
-    // Function to handle incoming messages
-    const handleMessage = (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    };
-
-    // Set up the socket event listener
-    socket.on('message', handleMessage);
-
-    // Clean up the socket event listener when the component unmounts
-    return () => {
-      socket.off('message', handleMessage);
-    };
-  }, []);
-
-  const sendMessage = () => {
-    if (messageText.trim()) {
-      socket.emit('sendMessage', { text: messageText });
-      setMessageText('');
-    }
+  const setTokenHandler = (token) => {
+    setToken(token);
+    localStorage.setItem('token', token);
   };
 
   return (
-    <div className="App">
-      <h1>Real-Time Chat App</h1>
-      <div className="messages">
-        {messages.map((message, index) => (
-          <Message key={index} username={message.username} text={message.text} />
-        ))}
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Register />} />
+          <Route path="/login" element={<Login setToken={setTokenHandler} />} />
+          <Route path="/chat" element={token ? <Chat token={token} /> : <Login setToken={setTokenHandler} />} />
+        </Routes>
       </div>
-      <div className="input-box">
-        <input
-          type="text"
-          value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
-          placeholder="Type your message..."
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
-    </div>
+    </Router>
   );
 }
 
