@@ -17,7 +17,6 @@ const Todo = () => {
   return (
     <div>
     <h1>Task Manager</h1>
-    {/* <hr /> */}
 
 
     <ul >
