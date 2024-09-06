@@ -63,7 +63,7 @@ function Resume() {
               <Heading as="h2" size="sm" mb={2}>Experience</Heading>
               <Box>
                 <Text fontWeight="bold">Operation Executive | Finnovation Tech Solution Pvt Ltd</Text>
-                <Text>June 2022 - May 2025</Text>
+                <Text>May 2022 - Aug 2024</Text>
                 <Text>Worked as an Operation Executive</Text>
               </Box>
             </Box>
