@@ -17,8 +17,8 @@ function Resume() {
       },
       x: 10,
       y: 10,
-      width: 190, // Full width - margin
-      windowWidth: 600 // Large enough to capture entire width
+      width: 190, 
+      windowWidth: 600 
     });
   };
 
@@ -26,7 +26,7 @@ function Resume() {
     <ChakraProvider>
       <Box>
         <Flex  color="white" p={4} align="center">
-          <Heading as="h1" size="md" color="white" ml={4}></Heading>
+          <Heading as="h1" size="md" color="white" ></Heading>
           <Spacer />
           <Button colorScheme="red"_hover={{ bg: "green.500" }} onClick={generatePDF}>
             Download PDF
@@ -34,7 +34,6 @@ function Resume() {
         </Flex>
 
         <Box ref={resumeRef} p={4} maxW="600px" mx="auto" fontSize="m">
-          {/* Header Section */}
           <Flex direction="column"     mb={6} bg="teal.900" color="white" p={4} borderRadius="md">
             <Flex direction="row" justifyContent="space-around">
               <Avatar size="lg" src={require("../asset/profile-pic.png")} alt="Profile Picture" mr={4} />
@@ -48,7 +47,6 @@ function Resume() {
           </Flex>
 
           <Container>
-            {/* Profile Section */}
             <Box mb={4}>
               <Heading as="h2" size="sm" mb={2}>Contact</Heading>
               <Text>Phone: 7908295742</Text>
@@ -58,7 +56,6 @@ function Resume() {
               </Link>
             </Box>
 
-            {/* Experience Section */}
             <Box mb={4}>
               <Heading as="h2" size="sm" mb={2}>Experience</Heading>
               <Box>
@@ -68,7 +65,6 @@ function Resume() {
               </Box>
             </Box>
 
-            {/* Education Section */}
             <Box mb={4}>
               <Heading as="h2" size="sm" mb={2}>Education</Heading>
               <Box mb={1}>
@@ -85,7 +81,6 @@ function Resume() {
               </Box>
             </Box>
 
-            {/* Skills Section */}
             <Box mb={4}>
               <Heading as="h2" size="sm" mb={2}>Technical Skills</Heading>
               <HStack spacing={2} wrap="wrap">
@@ -106,7 +101,6 @@ function Resume() {
               </HStack>
             </Box>
 
-            {/* Hobbies Section */}
             <Box mb={4}>
               <Heading as="h2" size="sm" mb={2}>Hobbies</Heading>
               <Text>- Travelling</Text>
