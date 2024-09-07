@@ -1,0 +1,19 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 150px;
+    padding: 50px;
+    animation: fananim 1s linear infinite;
+    transform-origin: 50% 50%; /* Ensures rotation around the center */
+}
+
+@keyframes fananim {
+    100% {
+        transform: rotate(360deg);
+    }
+}
