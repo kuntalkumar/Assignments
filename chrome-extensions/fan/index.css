@@ -3,17 +3,76 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f0f0f0;
 }
 
-img {
-    width: 150px;
-    padding: 50px;
-    animation: fananim 1s linear infinite;
-    transform-origin: 50% 50%; /* Ensures rotation around the center */
+#main {
+    text-align: center;
+    gap: 100px;
+}
+#img1{
+    width: 200px;
+    animation: fananim 0s linear infinite;
+
+}
+
+#img {
+    width: 200px;
+
+    /* padding: 50px; */
+    animation: fananim 0s linear infinite;
+    transform-origin: 50% 50%;
 }
 
 @keyframes fananim {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.fan-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fan-button:hover {
+    background-color: #4d749d;
+    transform: scale(1.05);
+    color: black;
+    font-weight: bold;
+}
+
+.fan-button:active {
+    transform: scale(0.95);
+}
+
+.fan-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#onbtn{
+    background-color: #03802d;
+}
+#onbtn:hover{
+    background-color: #6ec68b;
+    color: black;
+    font-weight: bold;
+}
+#offbtn{
+    background-color: #ee0909;
+}
+
+#offbtn:hover{
+    background-color: #9d6b6b;
+    color: black;
+    font-weight: bold;
 }

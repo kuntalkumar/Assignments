@@ -1,22 +1,31 @@
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Fan</title>
-            <link rel="stylesheet" href="index.css">
-        </head>
-        <body>
-            <div id="main">
-                <img id="img" src="./assets/fan.png" alt="Fan image">
-                <button onclick="myFunction(1)">ON</button>
-                <button onclick="myFunction(0)">OFF</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="main">
+        <div>
+            <img id="img" src="./assets/fan.png" alt="Fan image">
+            <img id="img1" src="./assets/fan.png" alt="Fan image">
 
-                <button onclick="myFunction(1)">Speed 1</button>
-                <button onclick="myFunction(0.5)">Speed 2</button>
-                <button onclick="myFunction(0.2)">Speed 3</button>
-            </div>
-        </body>
-        <script src="./index.js"></script>
-        </html>
-    
+        </div>
+        <div>
+            
+        <button class="fan-button" id="onbtn" onclick="myFunction(1)">ON</button>
+        <button class="fan-button" id="offbtn" onclick="myFunction(0)">OFF</button>
+        <button class="fan-button" onclick="myFunction(1)">Speed 1</button>
+        <button class="fan-button" onclick="myFunction(0.5)">Speed 2</button>
+        <button class="fan-button" onclick="myFunction(0.3)">Speed 3</button>
+        <button class="fan-button" id="turboCool" onclick="myFunction(0.2)">Turbo Cool</button>
+
+        </div>
+       
+
+    </div>
+</body>
+<script src="./index.js"></script>
+</html>
