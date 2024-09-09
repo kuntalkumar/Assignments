@@ -1,5 +1,5 @@
 import React from 'react'
-import Resume from './component/App'
+import Resume from './components/Resume'
 
 const App = () => {
   return (
