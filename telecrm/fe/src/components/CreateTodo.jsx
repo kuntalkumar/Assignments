@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AppContext } from '../App';
-import { useNavigate } from 'react-router-dom';
 
-const CreateTodo = () => {
+const CreateTodo = ({ closeModal }) => {
   const [inp, setInp] = useState("");
   const { val, setVal } = useContext(AppContext);
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,23 +14,23 @@ const CreateTodo = () => {
     };
 
     setVal([...val, newTask]);  // Update the context with the new task
-    navigate("/");  // Navigate back to the Todo list
+    closeModal();  // Close the modal
   };
 
   return (
-    <div>
-      <h2>Create New Todo</h2>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-3">
         <input
           required
           type="text"
+          className="form-control"
           placeholder="Enter task"
           value={inp}
           onChange={(e) => setInp(e.target.value)}
         />
-        <input type="submit" value="Create Todo" />
-      </form>
-    </div>
+      </div>
+      <input type="submit" className="btn btn-success" value="Create Todo" />
+    </form>
   );
 };
 

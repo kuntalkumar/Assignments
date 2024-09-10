@@ -1,35 +1,32 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../App';
+import CreateTodo from './CreateTodo';
 
 const Todo = () => {
-  const navigate = useNavigate();
   const { val, setVal } = useContext(AppContext);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleClick = () => {
-    navigate("/create");
-  };
-  const handleEdit=(i)=>{
-
+  const handleEdit = (i) => {
     const newVal = val.map((ele, ind) => 
-        ind === i ? { ...ele, status: ele.status === "Complete" ? "Pending" : "Complete" } : ele
-      );
-      setVal(newVal);
+      ind === i ? { ...ele, status: ele.status === "Complete" ? "Pending" : "Complete" } : ele
+    );
+    setVal(newVal);
+  };
 
-  }
+  const handleDelete = (i) => {
+    const newVal = val.filter((ele, ind) => ind !== i);
+    setVal(newVal);
+  };
 
-  const handleDelete=(i)=>{
-    const newVal=val.filter((ele,ind)=>ind!=i)
-    setVal(newVal)
-
-  }
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   return (
-    <div>
-      <h1>ToDo App</h1>
-      <button onClick={handleClick}>Create Todo</button>
-      <div>
-        <table>
+    <div className="container mt-4">
+      <h1 className="mb-4">ToDo App</h1>
+      <button className="btn btn-primary mb-3" onClick={openModal}>Create Todo</button>
+      <div className="table-responsive">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th>SL No</th>
@@ -39,24 +36,34 @@ const Todo = () => {
             </tr>
           </thead>
           <tbody>
-            {val?.map((ele, i) => (
+            {val.map((ele, i) => (
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{ele.task}</td>
                 <td>{ele.status}</td>
                 <td>
-                  <button onClick={()=>{
-                    handleEdit(i)
-                  }}>Toggle</button>
-
-                  <button onClick={()=>{
-                    handleDelete(i)
-                  }} >Delete</button>
+                  <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(i)}>Toggle</button>
+                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(i)}>Delete</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Modal for CreateTodo */}
+      <div className={`modal fade ${showModal ? 'show d-block' : ''}`} tabIndex="-1" aria-labelledby="createTodoModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="createTodoModalLabel">Create New Todo</h5>
+              <button type="button" className="btn-close" onClick={closeModal} aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <CreateTodo closeModal={closeModal} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
