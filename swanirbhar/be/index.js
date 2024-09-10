@@ -1,16 +1,28 @@
-const express =require("express")
-const mongoose=require("mongoose")
-const dotenv=require("dotenv")
-const bcrypt=require("bcrypt")
-const jwt=require("jsonwebtoken")
-dotenv.config()
-const app=express();
-app.use(express.json())
-const mongoDbUrl=process.env.MONGODB_URL
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
+dotenv.config();
+const app = express();
+app.use(express.json());
+const mongoDbUrl = process.env.MONGODB_URL;
 
+const corsOptions = {
+    origin: 'http://localhost:3000', // Replace with your frontend URL or use '*' for allowing all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Define the allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Define the allowed headers
+};
+app.use(cors(corsOptions));
 
-// code for user management 
+// MongoDB connection
+mongoose.connect(mongoDbUrl)
+    .then(() => console.log("Connected to db successfully"))
+    .catch(() => console.log("Failed to connect to db"));
+
+// User schema and model
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,10 +30,8 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: Number,
-        require:true,
-        length:10,
-        
-        
+        required: true,
+        length: 10
     },
     email: {
         type: String,
@@ -31,53 +41,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8  
+        minlength: 8
     }
 });
+const UserModel = mongoose.model("user", userSchema);
 
-const UserModel=mongoose.model("user",userSchema)
-
-app.post("/sighnup",async(req,res)=>{
-
-const {name,phone,email,password}=req.body
-
-const isUser= await UserModel.findOne({email})
-
-if(isUser){
-    res.status(400).json({message : "Already Registered"})
-}
-const hashPassword= await bcrypt.hash(password,10)
-const newUser={
-    name:name,
-    phone:phone,
-    email:email,
-    password:hashPassword
-}
-const newUserdata= await UserModel.create(newUser)
-res.status(200).json({message:newUserdata})
-})
-
-
-app.post("/login",async(req,res)=>{
-    const {email,password}=req.body;
-    const isUser= await UserModel.findOne({email})
-    if(!isUser){
-        res.status(400).json({message : "Not found any user kindly Sighnup "})
-
-    }
-    const checkPassword= await bcrypt.compare(password,isUser.password)
-
-    if(!checkPassword){
-        res.status(404).json({message : "wrong password "})
-    }
-    const token = jwt.sign({ id: isUser._id, email: isUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ message: "Logged in successfully", token });
-
-
-})
-
-//  below portion of code for task management
-
+// Task schema and model
 const taskSchema = new mongoose.Schema({
     task: {
         type: String,
@@ -88,56 +57,88 @@ const taskSchema = new mongoose.Schema({
         enum: ['pending', 'progress', 'completed'],
         default: 'pending'
     },
-    priority : {
-                type:String
+    priority: {
+        type: String
     }
-}); 
-
+});
 const TaskModel = mongoose.model("task", taskSchema);
 
-app.post("/addtask",async(req,res)=>{
+// User signup
+app.post("/signup", async (req, res) => {
+    const { name, phone, email, password } = req.body;
+    const isUser = await UserModel.findOne({ email });
+    if (isUser) {
+        return res.status(400).json({ message: "Already Registered" });
+    }
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = { name, phone, email, password: hashPassword };
+    const newUserdata = await UserModel.create(newUser);
+    res.status(200).json({ message: newUserdata });
+});
 
-    const{task}=req.body
-    const newTask= await TaskModel.create({task})
+// User login
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const isUser = await UserModel.findOne({ email });
+    if (!isUser) {
+        return res.status(400).json({ message: "Not found any user, kindly Signup" });
+    }
+    const checkPassword = await bcrypt.compare(password, isUser.password);
+    if (!checkPassword) {
+        return res.status(404).json({ message: "Wrong password" });
+    }
+    const token = jwt.sign({ id: isUser._id, email: isUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ message: "Logged in successfully", token });
+});
 
-    res.status(201).json({message: newTask})
-
-
-})
-
-app.get("/task",async(req,res)=>{
-    const alltasks= await TaskModel.find()
-
-    res.status(201).json({message:alltasks})
-})
-
-app.put("/edit/:id", async(req,res)=>{
+// Create a new task
+app.post("/addtask", async (req, res) => {
+    const { task, status, priority } = req.body;
 
     try {
-        const { status } = req.body;
-        const taskId = req.params.id;
+        const newTask = await TaskModel.create({ task, status, priority });
+        res.status(201).json({ message: "Task created successfully", newTask });
+    } catch (err) {
+        res.status(500).json({ message: "Server error while creating the task", error: err });
+    }
+});
+
+// Update an existing task
+app.put("/edit/:id", async (req, res) => {
+    const { task, status, priority } = req.body;
+    const taskId = req.params.id;
+
+    try {
         const updatedTask = await TaskModel.findByIdAndUpdate(
             taskId,
-            { status },
-            { new: true, runValidators: true } 
+            { task, status, priority },
+            { new: true, runValidators: true }
         );
         if (!updatedTask) {
             return res.status(404).json({ message: "Task not found" });
         }
+        res.status(200).json({ message: "Task updated successfully", updatedTask });
+    } catch (err) {
+        res.status(500).json({ message: "Server error while updating the task", error: err });
+    }
+});
 
-        res.status(200).json({ message: "Task edited successfully", updatedTask });
-}
+// Get all tasks
+app.get("/task", async (req, res) => {
+    try {
+        const tasks = await TaskModel.find();
+        // res.status(200).json({ tasks });
+        res.send(tasks)
+    } catch (err) {
+        res.status(500).json({ message: "Server error while fetching tasks", error: err });
+    }
+});
 
-catch(err){
-            res.status(500).json({message : "server error while editing the tasks "})
-}
-})
-
+// Delete a task
 app.delete("/delete/:id", async (req, res) => {
     try {
         const taskId = req.params.id;
         const deletedTask = await TaskModel.findByIdAndDelete(taskId);
-
         if (!deletedTask) {
             return res.status(404).json({ message: "Task not found" });
         }
@@ -147,15 +148,7 @@ app.delete("/delete/:id", async (req, res) => {
     }
 });
 
-
-const port=8080
-app.listen(port,(req,res)=>{
-
-    console.log("App listening on port no ", port)
-    mongoose.connect(mongoDbUrl).then((ele)=>{
-        console.log("Connected to db successfullly")
-    }).catch(()=>{
-        console.log("Failled to connect to db")
-    })
-
-})
+const port = 8080;
+app.listen(port, () => {
+    console.log("App listening on port", port);
+});
