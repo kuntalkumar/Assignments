@@ -11,8 +11,10 @@ const Todo = () => {
   };
   const handleEdit=(i)=>{
 
-   const newVal= val.filter((ele)=> ele.status="Complete")
-   setVal(newVal)
+    const newVal = val.map((ele, ind) => 
+        ind === i ? { ...ele, status: ele.status === "Complete" ? "Pending" : "Complete" } : ele
+      );
+      setVal(newVal);
 
   }
 
@@ -37,7 +39,7 @@ const Todo = () => {
             </tr>
           </thead>
           <tbody>
-            {val && val.map((ele, i) => (
+            {val?.map((ele, i) => (
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{ele.task}</td>
