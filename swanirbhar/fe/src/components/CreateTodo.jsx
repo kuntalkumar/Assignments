@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, FormControl, FormLabel, Input, Select, Stack, Heading } from '@chakra-ui/react';
 
 const CreateTodo = () => {
   const [task, setTask] = useState("");
@@ -33,25 +34,30 @@ const CreateTodo = () => {
   };
 
   return (
-    <div>
-      <h2>Create New Todo</h2>
+    <Box p={5} maxW="md" mx="auto">
+      <Heading mb={4}>Create New Todo</Heading>
       <form onSubmit={handleSubmit}>
-        <input
-          required
-          type="text"
-          placeholder="Enter task"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-        />
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-          <option value="">Select</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        <input type="submit" value="Create Todo" />
+        <Stack spacing={4}>
+          <FormControl isRequired>
+            <FormLabel>Task</FormLabel>
+            <Input
+              placeholder="Enter task"
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Priority</FormLabel>
+            <Select value={priority} onChange={(e) => setPriority(e.target.value)}>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </Select>
+          </FormControl>
+          <Button colorScheme="blue" type="submit">Add Todo</Button>
+        </Stack>
       </form>
-    </div>
+    </Box>
   );
 };
 

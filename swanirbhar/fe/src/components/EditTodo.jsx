@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, FormControl, FormLabel, Input, Select, Stack, Heading } from '@chakra-ui/react';
 
 const EditTodo = () => {
-  const [task, setTask] = useState("");        // Holds the task content
-  const [priority, setPriority] = useState("");  // Holds the task priority
-  const [status, setStatus] = useState("pending");   // Holds the task status
+  const [task, setTask] = useState("");
+  const [priority, setPriority] = useState("");
+  const [status, setStatus] = useState("pending");
   const navigate = useNavigate();
   const location = useLocation();
-  const taskData = location.state?.ele; // Retrieve task data from location state
+  const taskData = location.state?.ele;
 
   useEffect(() => {
     if (taskData) {
-      setTask(taskData.task);      // Set initial task content
-      setPriority(taskData.priority);  // Set initial task priority
-      setStatus(taskData.status);    // Set initial task status
+      setTask(taskData.task);
+      setPriority(taskData.priority);
+      setStatus(taskData.status);
     }
   }, [taskData]);
 
@@ -21,9 +22,9 @@ const EditTodo = () => {
     e.preventDefault();
 
     const updatedTask = {
-      task,        // Keep the task content the same
-      status,      // Updated status
-      priority,    // Updated priority
+      task,
+      status,
+      priority,
     };
 
     try {
@@ -34,7 +35,7 @@ const EditTodo = () => {
       });
 
       if (res.ok) {
-        navigate("/");  // Redirect to the homepage on success
+        navigate("/");
       } else {
         console.error("Error:", await res.text());
       }
@@ -44,33 +45,39 @@ const EditTodo = () => {
   };
 
   return (
-    <div>
-      <h2>Edit Todo</h2>
+    <Box p={5} maxW="md" mx="auto">
+      <Heading mb={4}>Edit Todo</Heading>
       <form onSubmit={handleSubmit}>
-        <input
-          required
-          type="text"
-          placeholder="Enter task"
-          value={task}  // Display task content (unchangeable)
-          onChange={(e) => setTask(e.target.value)}
-          disabled  // Disable editing task content
-        />
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-        <option value="">Select</option>
-
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-
-          <option value="pending">Pending</option>
-          <option value="progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-        <input type="submit" value="Update Todo" />
+        <Stack spacing={4}>
+          <FormControl isRequired>
+            <FormLabel>Task</FormLabel>
+            <Input
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+              placeholder="Enter task"
+              isRequired
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Priority</FormLabel>
+            <Select value={priority} onChange={(e) => setPriority(e.target.value)}>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Status</FormLabel>
+            <Select value={status} onChange={(e) => setStatus(e.target.value)}>
+              <option value="pending">Pending</option>
+              <option value="progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </Select>
+          </FormControl>
+          <Button colorScheme="blue" type="submit">Update Todo</Button>
+        </Stack>
       </form>
-    </div>
+    </Box>
   );
 };
 
