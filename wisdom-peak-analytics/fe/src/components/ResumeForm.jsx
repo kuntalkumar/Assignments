@@ -5,53 +5,25 @@ import { FaImage } from 'react-icons/fa';
 const ResumeForm = ({ onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
-//     phone: '',
-//     email: '',
-//     jobTitle: '',
-//     linkedin: '',
-//     github: '',
-//     portfolio: '',
-//     profilePic: '',
-//     experiences: [
-//       { jobTitle: '', company: '', startDate: '', endDate: '', jobDescription: '' }
-//     ],
-//     education: [
-//       { degree: '', institution: '', graduationDate: '' }
-//     ],
-//     technicalSkills: [],
-//     softSkills: [],
-//     hobbies: '',
-//     references: '',
-//   });
-
-// using dummy data 
-
-name: "Kuntal Kumar",
-phone: "+917908295742",
-email: "kuntalkumar789@gmail.com",
-jobTitle: "Full Stack Web Developer",
-linkedin: "https://www.linkedin.com/in/kuntal-kumar-621205236/",
-github: "https://github.com/kuntalkumar",
-portfolio: "kuntalkumar.github.io",
-profilePic: "../assets/profile-pic.png",
-experiences: [
-  { jobTitle: "Operation Executive", company: "Finovation Tech Solution Pvt Ltd", startDate: "2022-05-19", endDate: "2024-08-13", jobDescription: "Worked on operations" },
-],
-education: [
-    { degree: "Full Stack Web Development", institution: "Masai School", graduationDate: "2024-04-01" }
-
-    ,
-  { degree: "Bachelore in Electronics And Communication Engineering ", institution: "Bengal Institute Of Technology And Management", graduationDate: "2025-05-01" }
-],
-technicalSkills: ["HTML","CSS","JavaScript", "React", "Node.js","Express", "MongoDB"],
-softSkills: ["Communication", "Teamwork", "Problem-Solving", "Adaptability"],
-hobbies: "Travelling, Reading Technical Blogs, Listening Music",
-references: "Available upon request"
-});
-
-
-/// till this part
-
+    phone: '',
+    email: '',
+    jobTitle: '',
+    linkedin: '',
+    github: '',
+    portfolio: '',
+    profilePic: '',
+    experiences: [
+      { jobTitle: '', company: '', startDate: '', endDate: '', jobDescription: '' }
+    ],
+    education: [
+      { degree: '', institution: '', graduationDate: '' }
+    ],
+    technicalSkills: [],
+    softSkills: [],
+    hobbies: '',
+    references: '',
+    portfolioProjects: []
+  });
 
   const toast = useToast();
 
@@ -75,13 +47,21 @@ references: "Available upon request"
   };
 
   const handleSkillsChange = (e, type) => {
+    const skills = e.target.value.split(',').map(skill => skill.trim());
+    const ratings = skills.map(() => Math.floor(Math.random() * 5) + 1); // Example ratings (replace with user input)
     setFormData({
       ...formData,
-      [type]: e.target.value.split(',').map(skill => skill.trim())
+      [type]: skills,
+      [`${type}Ratings`]: ratings,
     });
   };
 
-
+  const handlePortfolioProjectChange = (index, e) => {
+    const { name, value } = e.target;
+    const portfolioProjects = [...formData.portfolioProjects];
+    portfolioProjects[index] = { ...portfolioProjects[index], [name]: value };
+    setFormData({ ...formData, portfolioProjects });
+  };
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
@@ -193,7 +173,8 @@ references: "Available upon request"
               <Input name="institution" value={edu.institution} onChange={(e) => handleEducationChange(index, e)} required />
             </FormControl>
             <FormControl mb={2}>
-              <FormLabel>Graduation Date</FormLabel>
+
+<FormLabel>Graduation Date</FormLabel>
               <Input name="graduationDate" type="date" value={edu.graduationDate} onChange={(e) => handleEducationChange(index, e)} required />
             </FormControl>
           </Box>
@@ -213,6 +194,37 @@ references: "Available upon request"
           <FormLabel>Soft Skills (comma-separated)</FormLabel>
           <Input value={formData.softSkills.join(', ')} onChange={(e) => handleSkillsChange(e, 'softSkills')} />
           <FormHelperText>e.g. Communication, Teamwork, Problem-Solving</FormHelperText>
+        </FormControl>
+
+        {/* Portfolio Section */}
+        <FormControl mb={4}>
+          <FormLabel>Portfolio Projects</FormLabel>
+          {formData.portfolioProjects.map((project, index) => (
+            <Box key={index} mb={2}>
+              <InputGroup>
+                <InputLeftElement pointerEvents="none">
+                  <FaImage color="gray.300" />
+                </InputLeftElement>
+                <Input name="imageUrl" value={project.imageUrl} onChange={(e) => handlePortfolioProjectChange(index, e)} />
+              </InputGroup>
+              <FormControl mb={2}>
+                <FormLabel>Title</FormLabel>
+                <Input name="title" value={project.title} onChange={(e) => handlePortfolioProjectChange(index, e)} />
+              </FormControl>
+              <FormControl mb={2}>
+                <FormLabel>Description</FormLabel>
+                <Textarea name="description" value={project.description} onChange={(e) => handlePortfolioProjectChange(index, e)} />
+              </FormControl>
+              <FormControl mb={2}>
+                <FormLabel>Link</FormLabel>
+                <Input name="link" value={project.link} onChange={(e) => handlePortfolioProjectChange(index, e)} />
+              </FormControl>
+            </Box>
+          ))}
+          <Button type="button" onClick={() => setFormData({
+            ...formData,
+            portfolioProjects: [...formData.portfolioProjects, { imageUrl: '', title: '', description: '', link: '' }]
+          })}>Add More Project</Button>
         </FormControl>
 
         {/* Hobbies Section */}
