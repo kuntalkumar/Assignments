@@ -4,15 +4,15 @@ import Todo from './components/Todo';
 import CreateTodo from './components/CreateTodo';
 import { createContext, useState } from 'react';
 
-
 const AppContext = createContext();
 
 function App() {
-  const [val, setVal] = useState([]);
-console.log(val)
+  const [val, setVal] = useState([
+    { task: "Create project", status: "Pending" }
+  ]); // Initialize with some default data
+  
   return (
     <div className="App">
-     
       <AppContext.Provider value={{ val, setVal }}>
         <Routes>
           <Route path='/' element={<Todo />} />

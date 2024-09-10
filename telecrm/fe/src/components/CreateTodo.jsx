@@ -1,46 +1,39 @@
-import React, { useContext, useState } from 'react'
-import { AppContext } from '../App'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from 'react';
+import { AppContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTodo = () => {
+  const [inp, setInp] = useState("");
+  const { val, setVal } = useContext(AppContext);
+  const navigate = useNavigate();
 
-    const[inp,setInp]=useState("")
+  const handleSubmit = (e) => {
+    e.preventDefault();
     
-    const [data,setData]=useState([
-        {task:"Create project",status:"Pending"}
-    ])
-    
-    const {setVal}=useContext(AppContext)
-const navigate=useNavigate()
-        const handleSubmit=(e)=>{
-            e.preventDefault();
+    const newTask = {
+      task: inp,
+      status: "Pending"
+    };
 
-            let newtasks={
-                task:inp,
-                status:"pending"
-                
-            }
-            setData([...data,newtasks])
-
-
-
-            navigate("/")
-            
-        }
-        setVal(data)
-
-        // console.log(data)
-
-        
+    setVal([...val, newTask]);  // Update the context with the new task
+    navigate("/");  // Navigate back to the Todo list
+  };
 
   return (
     <div>
-      <form action="" onSubmit={(e)=>handleSubmit(e)}>
-        <input required="true" type="text" onChange={(e)=>setInp(e.target.value) }/>
-        <input type="submit" />
+      <h2>Create New Todo</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          required
+          type="text"
+          placeholder="Enter task"
+          value={inp}
+          onChange={(e) => setInp(e.target.value)}
+        />
+        <input type="submit" value="Create Todo" />
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateTodo
+export default CreateTodo;
