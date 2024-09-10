@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../App';
 import CreateTodo from './CreateTodo';
+import { Button, Modal, Table, Container } from 'react-bootstrap';
+import './Todo.css'; // Custom CSS for additional styling
 
 const Todo = () => {
   const { val, setVal } = useContext(AppContext);
@@ -22,50 +24,51 @@ const Todo = () => {
   const closeModal = () => setShowModal(false);
 
   return (
-    <div className="container mt-4">
-      <h1 className="mb-4">ToDo App</h1>
-      <button className="btn btn-primary mb-3" onClick={openModal}>Create Todo</button>
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>SL No</th>
-              <th>Task</th>
-              <th>Status</th>
-              <th>Actions</th>
+    <Container className="mt-4">
+      <h1 className="mb-4 text-center" style={{ color: '#007bff' }}>Todo App</h1>
+      <Button variant="primary" className="mb-3" onClick={openModal}>Create Todo</Button>
+
+      <Table striped bordered hover responsive className="custom-table">
+        <thead>
+          <tr>
+            <th>SL No</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {val?.map((ele, i) => (
+            <tr key={i} className={ele.status === "Complete" ? 'table-success' : 'table-warning'}>
+              <td>{i + 1}</td>
+              <td>{ele.task}</td>
+              <td>{ele.status}</td>
+              <td>
+                <Button 
+                  variant={ele.status === "Complete" ? "danger" : "success"} 
+                  size="sm" 
+                  className="me-2"
+                  onClick={() => handleEdit(i)}
+                >
+                  {ele.status === "Complete" ? "Undo" : "Complete"}
+                </Button>
+                <Button variant="danger" size="sm" onClick={() => handleDelete(i)}>Delete</Button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {val.map((ele, i) => (
-              <tr key={i}>
-                <td>{i + 1}</td>
-                <td>{ele.task}</td>
-                <td>{ele.status}</td>
-                <td>
-                  <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(i)}>Toggle</button>
-                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(i)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </Table>
 
       {/* Modal for CreateTodo */}
-      <div className={`modal fade ${showModal ? 'show d-block' : ''}`} tabIndex="-1" aria-labelledby="createTodoModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="createTodoModalLabel">Create New Todo</h5>
-              <button type="button" className="btn-close" onClick={closeModal} aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <CreateTodo closeModal={closeModal} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <Modal show={showModal} onHide={closeModal} dialogClassName="modal-custom">
+        <Modal.Header closeButton>
+          <Modal.Title>Create New Todo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CreateTodo closeModal={closeModal} />
+        </Modal.Body>
+      </Modal>
+    </Container>
   );
 };
 
