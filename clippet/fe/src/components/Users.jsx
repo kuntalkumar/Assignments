@@ -11,7 +11,7 @@ function Users() {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:8080/api/users', {
+        const res = await axios.get('https://clippet-be.onrender.com/api/users', {
           headers: { 'x-auth-token': token }
         });
         setUsers(res.data);
