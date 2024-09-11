@@ -9,20 +9,31 @@ const AppContext = createContext();
 
 function App() {
   const [val, setVal] = useState([]);
+  const [loading, setLoading] = useState(true); // Start with loading true
 
   useEffect(() => {
-    fetch('http://localhost:8080/task')
+    fetch('https://telecrmbe.onrender.com/task')
       .then(response => response.json())
-      .then(data => setVal(data))
-      .catch(error => console.error('Error fetching tasks:', error));
+      .then(data => {
+        setVal(data);
+        setLoading(false); // Data fetched, set loading to false
+      })
+      .catch(error => {
+        console.error('Error fetching tasks:', error);
+        setLoading(false); // In case of error, also set loading to false
+      });
   }, []);
 
   return (
     <div className="App">
       <AppContext.Provider value={{ val, setVal }}>
-        <Routes>
-          <Route path='/' element={<Todo />} />
-        </Routes>
+        {loading ? (
+          <div className="loading">Loading...</div> 
+        ) : (
+          <Routes>
+            <Route path='/' element={<Todo />} />
+          </Routes>
+        )}
       </AppContext.Provider>
     </div>
   );

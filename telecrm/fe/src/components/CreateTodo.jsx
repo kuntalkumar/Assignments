@@ -9,7 +9,7 @@ const CreateTodo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:8080/addtask', {
+    fetch('https://telecrmbe.onrender.com/addtask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

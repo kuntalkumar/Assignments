@@ -8,7 +8,7 @@ const Todo = () => {
   const { val, setVal } = useContext(AppContext);
 
   const handleEdit = (id, status) => {
-    fetch(`http://localhost:8080/edit/${id}`, {
+    fetch(`https://telecrmbe.onrender.com/edit/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const Todo = () => {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8080/delete/${id}`, {
+    fetch(`https://telecrmbe.onrender.com/delete/${id}`, {
       method: 'DELETE',
     })
     .then(response => response.json())
