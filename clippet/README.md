@@ -7,13 +7,13 @@ This project is a Task Management System that allows users to register, log in, 
 ## Screenshots
 
 ### Login Page
-![Login Page](./screenshots/login.png)
+![Login Page](./asset/Screenshot%202024-09-12%20013052.png)
 
 ### Register Page
-![Register Page](./screenshots/register.png)
+![Register Page](./asset/Screenshot%202024-09-12%20013103.png)
 
 ### Users Page
-![Users Page](./screenshots/users.png)
+![Users Page](./asset/Screenshot%202024-09-12%20013138.png)
 
 ## Tech Stack
 
