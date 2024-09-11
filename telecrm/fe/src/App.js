@@ -1,21 +1,21 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Todo from './components/Todo';
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const AppContext = createContext();
 
 function App() {
-  const [val, setVal] = useState([
-    { task: "Create project", status: "Pending..." },
-    { task: "Create HTML", status: "Pending..." },
-    { task: "Put CSS Style", status: "Pending..." },
-    { task: "Add Javascript", status: "Pending..." },
-    { task: "Ready  Deploy", status: "Pending..." }
-  ]);
+  const [val, setVal] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/task')
+      .then(response => response.json())
+      .then(data => setVal(data))
+      .catch(error => console.error('Error fetching tasks:', error));
+  }, []);
 
   return (
     <div className="App">

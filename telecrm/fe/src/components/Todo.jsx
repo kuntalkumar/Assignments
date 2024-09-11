@@ -7,16 +7,34 @@ import CreateTodo from './CreateTodo';
 const Todo = () => {
   const { val, setVal } = useContext(AppContext);
 
-  const handleEdit = (i) => {
-    const newVal = val.map((ele, ind) =>
-      ind === i ? { ...ele, status: ele.status === "Complete" ? "Pending..." : "Complete" } : ele
-    );
-    setVal(newVal);
+  const handleEdit = (id, status) => {
+    fetch(`http://localhost:8080/edit/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: status === "Complete" ? "Pending..." : "Complete" }),
+    })
+    .then(response => response.json())
+    .then(updatedTask => {
+      const newVal = val.map(task => 
+        task._id === id ? updatedTask.updatedTask : task
+      );
+      setVal(newVal);
+    })
+    .catch(error => console.error('Error updating task:', error));
   };
 
-  const handleDelete = (i) => {
-    const newVal = val.filter((ele, ind) => ind !== i);
-    setVal(newVal);
+  const handleDelete = (id) => {
+    fetch(`http://localhost:8080/delete/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(() => {
+      const newVal = val.filter(task => task._id !== id);
+      setVal(newVal);
+    })
+    .catch(error => console.error('Error deleting task:', error));
   };
 
   return (
@@ -42,34 +60,34 @@ const Todo = () => {
       </div>
 
       <div className="mt-4">
-        <table >
+        <table>
           <thead>
- 
+            <tr>
               <th>SL No</th>
               <th className='taskHead'>Task</th>
               <th>Status</th>
               <th>Actions</th>
-        
+            </tr>
           </thead>
           <tbody>
-            {val?.map((ele, i) => (
-              <tr key={i}>
+            {val?.map((task, i) => (
+              <tr key={task._id}>
                 <td>{i + 1}</td>
                 <td>
                   <div className="task-box">
-                    {ele.task}
+                    {task.task}
                   </div>
                 </td>
                 <td>
-                  <div className={`status-box ${ele.status === "Complete" ? "complete" : ""}`}>
-                    {ele.status}
+                  <div className={`status-box ${task.status === "Complete" ? "complete" : ""}`}>
+                    {task.status}
                   </div>
                 </td>
                 <td>
-                  <button className="btn btn-info" onClick={() => handleEdit(i)}>
+                  <button className="btn btn-info" onClick={() => handleEdit(task._id, task.status)}>
                     Toggle Status
                   </button>
-                  <button className="btn btn-danger" onClick={() => handleDelete(i)}>
+                  <button className="btn btn-danger" onClick={() => handleDelete(task._id)}>
                     Delete
                   </button>
                 </td>

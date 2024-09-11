@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../App';
-import "./Todo.css"
+import "./Todo.css";
+
 const CreateTodo = () => {
   const [inp, setInp] = useState("");
   const { val, setVal } = useContext(AppContext);
@@ -8,16 +9,20 @@ const CreateTodo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newTask = {
-      task: inp,
-      status: "Pending.."
-    };
-
-    setVal([...val, newTask]);
-    setInp(""); 
-
-    
-    document.querySelector("#createTodoModal .btn-close").click();
+    fetch('http://localhost:8080/addtask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ task: inp, status: "Pending..." }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      setVal([...val, data.newTask]);
+      setInp("");
+      document.querySelector("#createTodoModal .btn-close").click();
+    })
+    .catch(error => console.error('Error creating task:', error));
   };
 
   return (
