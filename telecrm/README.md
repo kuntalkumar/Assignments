@@ -23,6 +23,12 @@ This To-Do App is a full-stack application designed to help users manage their t
   - Express.js
   - MongoDB
 
+## Deployment Links
+
+- **Frontend Before Adding Backend**: [Frontend Deployment Link](https://66e12f7a478f389024c187d9--splendorous-dusk-5199b1.netlify.app/)
+- **Frontend After Adding Backend**: [Frontend Deployment Link](https://66e147091b3facaec1b9214a--fascinating-granita-58abbd.netlify.app/)
+- **Backend**: [Backend Deployment Link](https://telecrmbe.onrender.com/task)
+
 ## API Endpoints
 
 - **POST /addtask**: Create a new task.
