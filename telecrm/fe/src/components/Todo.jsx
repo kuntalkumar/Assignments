@@ -46,7 +46,7 @@ const Todo = () => {
           <thead>
  
               <th>SL No</th>
-              <th>Task</th>
+              <th className='taskHead'>Task</th>
               <th>Status</th>
               <th>Actions</th>
         
@@ -66,7 +66,7 @@ const Todo = () => {
                   </div>
                 </td>
                 <td>
-                  <button className="btn btn-info me-2" onClick={() => handleEdit(i)}>
+                  <button className="btn btn-info" onClick={() => handleEdit(i)}>
                     Toggle Status
                   </button>
                   <button className="btn btn-danger" onClick={() => handleDelete(i)}>

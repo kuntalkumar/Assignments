@@ -13,7 +13,8 @@ function App() {
     { task: "Create project", status: "Pending..." },
     { task: "Create HTML", status: "Pending..." },
     { task: "Put CSS Style", status: "Pending..." },
-    { task: "Add Javascript", status: "Pending..." }
+    { task: "Add Javascript", status: "Pending..." },
+    { task: "Ready  Deploy", status: "Pending..." }
   ]);
 
   return (
