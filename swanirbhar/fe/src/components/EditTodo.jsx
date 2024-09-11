@@ -1,83 +1,90 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, FormControl, FormLabel, Input, Select, Stack, Heading } from '@chakra-ui/react';
+import {
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter,
+  Button, Input, Select, FormControl, FormLabel, FormErrorMessage
+} from '@chakra-ui/react';
 
-const EditTodo = () => {
-  const [task, setTask] = useState("");
-  const [priority, setPriority] = useState("");
-  const [status, setStatus] = useState("pending");
-  const navigate = useNavigate();
-  const location = useLocation();
-  const taskData = location.state?.ele;
+const EditTodo = ({ task, isOpen, onClose, onSuccess }) => {
+  const [taskName, setTaskName] = useState(task?.task || "");
+  const [status, setStatus] = useState(task?.status || "pending");
+  const [isTaskValid, setIsTaskValid] = useState(true);
 
   useEffect(() => {
-    if (taskData) {
-      setTask(taskData.task);
-      setPriority(taskData.priority);
-      setStatus(taskData.status);
+    if (task) {
+      setTaskName(task.task);
+      setStatus(task.status);
     }
-  }, [taskData]);
+  }, [task]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!taskName) {
+      setIsTaskValid(false);
+      return;
+    }
 
-    const updatedTask = {
-      task,
-      status,
-      priority,
-    };
+    const updatedTask = { ...task, task: taskName,status };
 
     try {
-      const res = await fetch(`http://localhost:8080/edit/${taskData._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(`http://localhost:8080/edit/${task._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedTask),
       });
 
       if (res.ok) {
-        navigate("/");
+        console.log("Task updated successfully");
+        onSuccess();
+        onClose();
       } else {
-        console.error("Error:", await res.text());
+        console.error("Error updating task:", await res.text());
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error updating task:", error);
     }
   };
 
   return (
-    <Box p={5} maxW="md" mx="auto">
-      <Heading mb={4}>Edit Todo</Heading>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={4}>
-          <FormControl isRequired>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Edit Todo</ModalHeader>
+        <ModalBody>
+          <FormControl isInvalid={!isTaskValid}>
             <FormLabel>Task</FormLabel>
             <Input
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
+              required
+              type="text"
               placeholder="Enter task"
-              isRequired
+              value={taskName}
+              onChange={(e) => {
+                setTaskName(e.target.value);
+                setIsTaskValid(true);
+              }}
+              _hover={{ borderColor: "blue.500" }}
+              focusBorderColor="blue.500"
             />
+            {!isTaskValid && <FormErrorMessage>Task is required.</FormErrorMessage>}
           </FormControl>
-          <FormControl>
-            <FormLabel>Priority</FormLabel>
-            <Select value={priority} onChange={(e) => setPriority(e.target.value)}>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </Select>
-          </FormControl>
-          <FormControl>
+          
+          <FormControl mt="4">
             <FormLabel>Status</FormLabel>
             <Select value={status} onChange={(e) => setStatus(e.target.value)}>
               <option value="pending">Pending</option>
-              <option value="progress">In Progress</option>
               <option value="completed">Completed</option>
             </Select>
           </FormControl>
-          <Button colorScheme="blue" type="submit">Update Todo</Button>
-        </Stack>
-      </form>
-    </Box>
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="green" mr={3} onClick={handleSubmit} _hover={{ bg: "green.600" }}>
+            Save
+          </Button>
+          <Button onClick={onClose} colorScheme="red" _hover={{ bg: "red.600" }}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

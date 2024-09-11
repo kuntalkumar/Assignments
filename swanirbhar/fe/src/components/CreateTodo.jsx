@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, FormControl, FormLabel, Input, Select, Stack, Heading } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import {
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter,
+  Button, Input, Select, useDisclosure, FormControl, FormLabel, FormErrorMessage
+} from '@chakra-ui/react';
 
-const CreateTodo = () => {
+const CreateTodo = ({ isOpen, onClose, onSuccess }) => {
   const [task, setTask] = useState("");
-  const [priority, setPriority] = useState("Low");
-  const navigate = useNavigate();
+  const [isTaskValid, setIsTaskValid] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!task) {
+      setIsTaskValid(false);
+      return;
+    }
 
-    const newTask = {
-      task,
-      status: "pending",
-      priority,
-    };
+    const newTask = { task, status: "pending" };
 
     try {
       const res = await fetch("http://localhost:8080/addtask", {
@@ -24,7 +25,8 @@ const CreateTodo = () => {
       });
 
       if (res.ok) {
-        navigate("/");
+        onSuccess();
+        onClose();
       } else {
         console.error("Error:", await res.text());
       }
@@ -34,30 +36,39 @@ const CreateTodo = () => {
   };
 
   return (
-    <Box p={5} maxW="md" mx="auto">
-      <Heading mb={4}>Create New Todo</Heading>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={4}>
-          <FormControl isRequired>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Create New Todo</ModalHeader>
+        <ModalBody>
+          <FormControl isInvalid={!isTaskValid}>
             <FormLabel>Task</FormLabel>
             <Input
+              required
+              type="text"
               placeholder="Enter task"
               value={task}
-              onChange={(e) => setTask(e.target.value)}
+              onChange={(e) => {
+                setTask(e.target.value);
+                setIsTaskValid(true);
+              }}
+              _hover={{ borderColor: "blue.500" }}
+              focusBorderColor="blue.500"
             />
+            {!isTaskValid && <FormErrorMessage>Task is required.</FormErrorMessage>}
           </FormControl>
-          <FormControl>
-            <FormLabel>Priority</FormLabel>
-            <Select value={priority} onChange={(e) => setPriority(e.target.value)}>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </Select>
-          </FormControl>
-          <Button colorScheme="blue" type="submit">Add Todo</Button>
-        </Stack>
-      </form>
-    </Box>
+          
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="green" mr={3} onClick={handleSubmit} _hover={{ bg: "green.600" }}>
+            Create
+          </Button>
+          <Button onClick={onClose} colorScheme="red" _hover={{ bg: "red.600" }}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 
