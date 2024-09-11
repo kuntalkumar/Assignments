@@ -28,20 +28,7 @@ h2 {
 }
 
 /* Button styling */
-button {
-  background-color: #0b8fe6;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
 
-button:hover {
-  background-color: #4d555a;
-}
 
 /* Table styling */
 table {
@@ -55,7 +42,7 @@ table {
 
 th, td {
   padding: 10px;
-  text-align: left;
+  /* text-align: left; */
   border-bottom: 1px solid #ddd;
 }
 
@@ -64,9 +51,6 @@ th {
   color: white;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
 
 tr:hover {
   background-color: #e9ecef;

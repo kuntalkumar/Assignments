@@ -1,0 +1,165 @@
+/* General Styles */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Container Styling */
+  .container {
+    background-color: #d9d1ed;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  /* Title Styling */
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for Table Headers */
+  
+ 
+  table thead th {
+    color: white;
+    padding: 15px;
+   padding-left: 50px;
+    background-color: #0a86d8;
+    text-transform: uppercase;
+  }
+  
+  table tbody tr:hover {
+    background-color: #e0f1f1;
+  }
+  
+  td{
+    text-align: center;
+    padding: 10px;
+  }
+  
+  /* Custom Box Styling for Task and Status */
+  .task-box {
+    display: inline-block;
+    padding: 20px 34px;
+    border-radius: 5px;
+    background-color: #dbe0e2;
+    box-shadow: 0 2px 4px rgba(179, 22, 22, 0.1);
+    font-weight: 500;
+    color: #333;
+  }
+  .status-box {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    background-color: #cecfd1;
+    box-shadow: 0 2px 4px rgba(179, 22, 22, 0.1);
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .status-box {
+    background-color: #ed843d;
+    color: #fff;
+  }
+  
+  .status-box.complete {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    background-color: #007bff;
+    font-weight: 500;
+
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #203144;
+  }
+  
+  .btn-info {
+    background-color: #17a2b8;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .btn-info:hover {
+    background-color: #138496;
+  }
+  
+  .btn-danger {
+    background-color: #e03c4c;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .btn-danger:hover {
+    background-color: #a84e57;
+    /* font-weight: ; */
+  }
+  
+  /* Modal Customization */
+  .modal-content {
+    background-color: #b5cadf;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .modal-header {
+    background-color: #007bff;
+    color: white;
+    border-bottom: none;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .btn-close {
+    color: white;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      margin-top: 20px;
+      padding: 10px;
+    }
+  
+    table {
+      font-size: 12px;
+    }
+  
+    .btn-primary {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    table thead th {
+     
+     padding-left:0px;
+     
+    }
+  }
+  
