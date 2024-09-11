@@ -1,37 +1,39 @@
-// import React, { useState, useContext } from 'react';
-// import { AppContext } from '../App';
+import React, { useContext, useState } from 'react';
+import { AppContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
-// const CreateTodo = ({ closeModal }) => {
-//   const [inp, setInp] = useState("");
-//   const { val, setVal } = useContext(AppContext);
+const CreateTodo = () => {
+  const [inp, setInp] = useState("");
+  const { val, setVal } = useContext(AppContext);
+  const navigate = useNavigate();
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     
-//     const newTask = {
-//       task: inp,
-//       status: "Pending"
-//     };
+    const newTask = {
+      task: inp,
+      status: "Pending"
+    };
 
-//     setVal([...val, newTask]);  // Update the context with the new task
-//     closeModal();  // Close the modal
-//   };
+    setVal([...val, newTask]);  // Update the context with the new task
+    navigate("/");  // Navigate back to the Todo list
+  };
 
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <div className="mb-3">
-//         <input
-//           required
-//           type="text"
-//           className="form-control"
-//           placeholder="Enter task"
-//           value={inp}
-//           onChange={(e) => setInp(e.target.value)}
-//         />
-//       </div>
-//       <input type="submit" className="btn btn-success" value="Create Todo" />
-//     </form>
-//   );
-// };
+  return (
+    <div>
+      <h2>Create New Todo</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          required
+          type="text"
+          placeholder="Enter task"
+          value={inp}
+          onChange={(e) => setInp(e.target.value)}
+        />
+        <input type="submit" value="Create Todo" />
+      </form>
+    </div>
+  );
+};
 
-// export default CreateTodo;
+export default CreateTodo;
