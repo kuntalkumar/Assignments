@@ -4,25 +4,28 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState(''); // Store as string initially
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('https://telecrmbe.onrender.com/signup', {
+    // Convert phone number to a number
+    const phoneNumber = Number(phone);
+
+    fetch('http://localhost:8080/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, phone, email, password }),
+      body: JSON.stringify({ name, phone: phoneNumber, email, password }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.message) {
           alert('Signup Successful!');
-          navigate('/login');
+          navigate('/');
         } else {
           alert(data.message);
         }
@@ -43,7 +46,7 @@ const Signup = () => {
         />
         <Input
           mb="3"
-          type="text"
+          type="text" // Use text to allow leading zeros
           placeholder="Enter phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}

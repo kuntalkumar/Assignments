@@ -1,17 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { Box, Button, Input, Heading, VStack } from '@chakra-ui/react';
-import { AppContext } from '../App';
+// import {  context } from '../App';
 import { useNavigate } from 'react-router-dom';
+import { context } from '../App';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setToken } = useContext(AppContext);
+  const { setToken } = useContext(context);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('https://telecrmbe.onrender.com/login', {
+    fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,9 +24,11 @@ const Login = () => {
         if (data.token) {
           localStorage.setItem('token', data.token);
           setToken(data.token);
-          navigate('/');
+          // setIsAuthenticate(true  )
+          navigate('/todo');
         } else {
           alert(data.message);
+          navigate("/signup")
         }
       })
       .catch((error) => console.error('Error logging in:', error));

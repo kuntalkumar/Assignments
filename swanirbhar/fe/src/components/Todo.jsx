@@ -12,6 +12,7 @@ const Todo = () => {
   const [tasks, setTasks] = useState([]);
   const [prioritizedTasks, setPrioritizedTasks] = useState([]);
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [isPrioritizing, setIsPrioritizing] = useState(false); // State to handle button disable
   const toast = useToast();
   const { isOpen: isCreateOpen, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure();
   const { isOpen: isEditOpen, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure();
@@ -21,8 +22,13 @@ const Todo = () => {
       const res = await fetch("http://localhost:8080/task");
       if (!res.ok) throw new Error("Failed to fetch tasks");
       const data = await res.json();
-      setTasks(data);
-      setPrioritizedTasks(data);
+      console.log(data.tasks)
+      if (Array.isArray(data)) { // Ensure data is an array
+        setTasks(data);
+        setPrioritizedTasks(data);
+      } else {
+        throw new Error("Data fetched is not an array");
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
       toast({
@@ -55,7 +61,7 @@ const Todo = () => {
       });
       if (res.ok) {
         setTasks(tasks.filter(task => task._id !== id));
-        setPrioritizedTasks(tasks.filter(task => task._id !== id))
+        setPrioritizedTasks(prioritizedTasks.filter(task => task._id !== id));
         toast({
           title: "Task deleted",
           status: "success",
@@ -78,8 +84,32 @@ const Todo = () => {
   };
 
   const handlePrioritize = async () => {
-    const updatedTasks = await prioritizeTasksWithAI(tasks);
-    setPrioritizedTasks(updatedTasks);
+    setIsPrioritizing(true); // Disable button
+    try {
+      const updatedTasks = await prioritizeTasksWithAI(tasks);
+      if (Array.isArray(updatedTasks)) { // Ensure updatedTasks is an array
+        setPrioritizedTasks(updatedTasks);
+        toast({
+          title: "Tasks prioritized",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        throw new Error("Prioritized tasks is not an array");
+      }
+    } catch (error) {
+      console.error("Error prioritizing tasks:", error);
+      toast({
+        title: "Error prioritizing tasks",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setIsPrioritizing(false); // Re-enable button
+    }
   };
 
   return (
@@ -89,47 +119,60 @@ const Todo = () => {
         <Button colorScheme="blue" onClick={handleCreate} _hover={{ bg: "blue.600" }}>
           Create Todo
         </Button>
-        <Button colorScheme="green" onClick={handlePrioritize} _hover={{ bg: "green.600" }}>
+        <Button 
+          colorScheme="green" 
+          onClick={handlePrioritize} 
+          _hover={{ bg: "green.600" }}
+          isLoading={isPrioritizing} // Disable button during prioritization
+        >
           Prioritize using AI
         </Button>
       </Box>
       <Box overflowX="auto">
         <Table colorScheme="blue">
-          <Thead color={"red"}>
+          <Thead>
+            <Tr>
               <Th>SL No</Th>
               <Th>Task</Th>
               <Th>Status</Th>
               <Th>Priority</Th>
               <Th>Actions</Th>
+            </Tr>
           </Thead>
           <Tbody>
-            {prioritizedTasks.map((task, i) => (
-              <Tr key={task._id}>
-                <Td>{i + 1}</Td>
-                <Td>{task.task}</Td>
-                <Td>{task.status}</Td>
-                <Td>{task.priority}</Td>
-                <Td>
-                  <Button
-                    colorScheme="yellow"
-                    size="sm"
-                    mr="2"
-                    onClick={() => handleEdit(task)}
-                    _hover={{ bg: "yellow.600" }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    colorScheme="red"
-                    size="sm"
-                    onClick={() => handleDelete(task._id)}
-                    _hover={{ bg: "red.600" }}
-                  >
-                    Delete
-                  </Button>
-                </Td>
+            {Array.isArray(prioritizedTasks) && prioritizedTasks.length > 0 ? (
+              prioritizedTasks.map((task, i) => (
+                <Tr key={task._id}>
+                  <Td>{i + 1}</Td>
+                  <Td>{task.task}</Td>
+                  <Td>{task.status}</Td>
+                  <Td>{task.priority}</Td>
+                  <Td>
+                    <Button
+                      colorScheme="yellow"
+                      size="sm"
+                      mr="2"
+                      onClick={() => handleEdit(task)}
+                      _hover={{ bg: "yellow.600" }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      size="sm"
+                      onClick={() => handleDelete(task._id)}
+                      _hover={{ bg: "red.600" }}
+                    >
+                      Delete
+                    </Button>
+                  </Td>
+                </Tr>
+              ))
+            ) : (
+              <Tr>
+                <Td colSpan="5" textAlign="center">No tasks available</Td>
               </Tr>
-            ))}
+            )}
           </Tbody>
         </Table>
       </Box>
