@@ -19,7 +19,7 @@ const Todo = () => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("http://localhost:8080/task");
+      const res = await fetch("https://swanirbhar-be.onrender.com/task");
       if (!res.ok) throw new Error("Failed to fetch tasks");
       const data = await res.json();
       console.log(data.tasks)
@@ -56,7 +56,7 @@ const Todo = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8080/delete/${id}`, {
+      const res = await fetch(`https://swanirbhar-be.onrender.com/delete/${id}`, {
         method: 'DELETE',
       });
       if (res.ok) {
@@ -113,8 +113,7 @@ const Todo = () => {
   };
 
   return (
-    <Box maxW="900px" mx="auto" mt="10">
-      <Heading mb="5" textAlign="center" color="blue.600">Todo App</Heading>
+    <Box maxW="900px" mx="auto" mt="10" backgroundColor={"pearl"}>
       <Box display="flex" justifyContent="space-between" mb="5">
         <Button colorScheme="blue" onClick={handleCreate} _hover={{ bg: "blue.600" }}>
           Create Todo

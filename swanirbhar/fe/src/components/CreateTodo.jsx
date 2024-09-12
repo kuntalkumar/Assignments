@@ -18,7 +18,7 @@ const CreateTodo = ({ isOpen, onClose, onSuccess }) => {
     const newTask = { task, status: "pending" };
 
     try {
-      const res = await fetch("http://localhost:8080/addtask", {
+      const res = await fetch("https://swanirbhar-be.onrender.com/addtask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTask),

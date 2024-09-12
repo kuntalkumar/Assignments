@@ -14,7 +14,7 @@ const Signup = () => {
     // Convert phone number to a number
     const phoneNumber = Number(phone);
 
-    fetch('http://localhost:8080/signup', {
+    fetch('https://swanirbhar-be.onrender.com/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

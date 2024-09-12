@@ -14,6 +14,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 //   const isAuthenticated = true; // Example: true means user is authenticated
 //   return isAuthenticated;
 // };
+{/* <Heading mb="5" textAlign="center" color="blue.600"></Heading> */}
+
 
 const context=createContext()
 function App() {

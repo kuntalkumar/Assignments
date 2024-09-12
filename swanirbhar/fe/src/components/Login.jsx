@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8080/login', {
+    fetch('https://swanirbhar-be.onrender.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ const EditTodo = ({ task, isOpen, onClose, onSuccess }) => {
     const updatedTask = { ...task, task: taskName,status };
 
     try {
-      const res = await fetch(`http://localhost:8080/edit/${task._id}`, {
+      const res = await fetch(`https://swanirbhar-be.onrender.com/edit/${task._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedTask),
