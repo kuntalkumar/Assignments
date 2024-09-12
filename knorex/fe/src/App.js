@@ -16,8 +16,10 @@ import {
   Flex,
   Heading,
   Text,
-} from '@chakra-ui/react';
-import { SunIcon, MoonIcon } from '@chakra-ui/icons';
+}
+ from '@chakra-ui/react';
+ 
+ import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import SignUpForm from './components/SighnUpForm.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation';
 import "./App.css"
@@ -29,7 +31,7 @@ function App() {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-
+const [sortetd, setSorted]=useState(users)
   const { toggleColorMode } = useColorMode();
   const navbarBg = useColorModeValue('teal.500', 'teal.800');
   // const navbarBg = useColorModeValue('teal.500', 'teal.800');
@@ -54,6 +56,28 @@ function App() {
     );
   };
 
+  const handleSortByEmail=async(val)=>{
+    const response = await fetch(`https://knorex-be.onrender.com/alluser`);
+    const ApiData= await response.json()
+
+    // console.log(val)
+    let Arr=[...users]
+if(val=="asc"){
+
+  let srtData=Arr.sort((a,b)=>(a.firstName).localeCompare(b.firstName))
+}else if (val=="desc"){
+  let srtData=Arr.sort((a,b)=>(b.firstName).localeCompare(a.firstName))
+
+}
+   
+
+setUsers(Arr)
+console.log(Arr)
+  }
+
+
+
+
   const handleDeleteUser = async (id) => {
     setLoading(true);
     await fetch(`https://knorex-be.onrender.com/delete/${id}`, { method: 'DELETE' });
@@ -64,12 +88,13 @@ function App() {
 
   const handleExport = async () => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const selectedUserData = users.filter((user) => selectedUsers.includes(user._id));
     const csvContent = `id,email,first_name,last_name\n${selectedUserData
       .map((user) => `${user._id},${user.email},${user.firstName},${user.lastName}`)
       .join('\n')}`;
+      console.log(csvContent)
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
@@ -86,8 +111,10 @@ function App() {
 
   return (
     <Box bg={pageBg} minHeight="100vh" p={4}>
+
       <Flex justify="space-between" align="center" bg={navbarBg} p={4} borderRadius="md" mb={6} boxShadow="md">
-        <Heading color={navbarTextColor} size="lg">User Management</Heading>
+           <Heading color={navbarTextColor} size="lg">User Management</Heading>
+        
         <Flex align="center">
           <IconButton
             aria-label="Toggle light/dark mode"
@@ -107,44 +134,53 @@ function App() {
             EXPORT
           </Button>
         </Flex>
+
       </Flex>
 
       <Box bg={tableBg} p={4} borderRadius="md" boxShadow="md">
+       
         <Table variant="simple">
           <Thead>
             <Tr>
               <Th color={tableTextColor}>Select</Th>
-              <Th color={tableTextColor}>Full Name</Th>
-              <Th color={tableTextColor}>Email</Th>
+              <Th color={tableTextColor}>Full Name <span  onClick={()=>handleSortByEmail("asc")} cursor={"pointer"}> asc</span>
+              <span  onClick={()=>handleSortByEmail("desc")} cursor={"pointer"}> desc</span>
+              </Th>
+              <Th color={tableTextColor}  >Email </Th>
               <Th color={tableTextColor}>Actions</Th>
             </Tr>
           </Thead>
+
+
           <Tbody>
-            {users?.map((user) => (
+              {users?.map((user) => (
+
               <Tr key={user._id}>
                 <Td>
                 <Checkbox
-  isChecked={selectedUsers.includes(user._id)}
-  onChange={() => handleSelectUser(user._id)}
-  colorScheme="teal" 
-  sx={{
-    '& .chakra-checkbox__control': {
-      backgroundColor: 'white', 
-      borderColor: 'gray.300', 
-    },
-    '& .chakra-checkbox__control[data-checked]': {
-      backgroundColor: 'teal.500', 
-      borderColor: 'teal.500',
-    },
-    '& .chakra-checkbox__icon': {
-      color: 'white', 
-    },
-  }}
-/>
+                    isChecked={selectedUsers.includes(user._id)}
+                    onChange={() => handleSelectUser(user._id)}
+                    colorScheme="teal" 
+                    sx={{
+                      '& .chakra-checkbox__control': {
+                        backgroundColor: 'white', 
+                        borderColor: 'gray.300', 
+                      },
+                      '& .chakra-checkbox__control[data-checked]': {
+                        backgroundColor: 'teal.500', 
+                        borderColor: 'teal.500',
+                      },
+                      '& .chakra-checkbox__icon': {
+                        color: 'white', 
+                      },
+                    }}
+                  />
+              </Td>
 
-                </Td>
                 <Td color={tableTextColor}>{user.firstName + " " + user.lastName}</Td>
+
                 <Td color={tableTextColor}>{user.email}</Td>
+                
                 <Td>
                   <Button 
                     colorScheme="red" 
@@ -155,10 +191,14 @@ function App() {
                     DELETE
                   </Button>
                 </Td>
+
               </Tr>
+
             ))}
           </Tbody>
+
         </Table>
+
       </Box>
 
       <SignUpForm isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)} setUsers={setUsers} />

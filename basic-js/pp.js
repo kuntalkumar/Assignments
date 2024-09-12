@@ -1,22 +1,34 @@
-function dd(){
+function mypromise(){
+
     return new Promise((resolve,reject)=>{
-        const kk=true 
-        setTimeout(() => {
-            if(kk){
-                resolve("kam ban gayi be !")
-            }else{
-                reject("Humse na ho payega !")
-            }
-            
-        }, 1000);
-      
+            const task=true;
 
+            setTimeout(()=>{
 
+                if(task){
+                    resolve("Ho gaya kam ")
+                }else {
+                    reject("nahi bani baat")
+                }
+            },1000)
     })
 }
 
-dd().then((res)=>{
+
+mypromise().then((res)=>{
     console.log(res)
-}).catch((error)=>{
-    console.log(error)
+}).catch((err)=>{
+console.log(err)
 })
+
+
+function outer (){
+    const hi="Hi from kkk"
+   return function inner(){
+
+        return hi;
+    }
+}
+
+const outerFunc=outer()
+console.log(outerFunc())

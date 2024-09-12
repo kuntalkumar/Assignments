@@ -140,3 +140,32 @@ function SignUpForm({ isOpen, onClose, setUsers }) {
 }
 
 export default SignUpForm;
+
+
+
+
+
+/* 
+
+//
+const [searchQuery, setSearchQuery] = useState('');
+
+// New code to filter users based on search query
+const filteredUsers = users.filter((user) =>
+  user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  user.email.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+// New Search Input Field
+<Flex align="center" mb={4}>
+  <Text mr={2}>Search:</Text>
+  <Input
+    placeholder="Search by name or email"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+</Flex> 
+
+
+*/

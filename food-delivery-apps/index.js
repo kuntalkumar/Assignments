@@ -39,3 +39,19 @@
 // 7. Calculates the correct price for 3 med pizzas, 2 pastas for a 80 year old in Staten Island with 20% tip on Thursday and using the promo code 30-OFF. $82.35
 
 // 8. Calculates the correct price for 6 large pizzas on Thursday for a 75 year old in Brooklyn with 15% tip. $150
+
+
+
+
+
+
+
+let count = 0;
+const intervalId = setInterval(() => {
+  console.log(count);
+  count++;
+  if (count === 5) {
+    clearInterval(intervalId);
+  }
+}, 1000);
+

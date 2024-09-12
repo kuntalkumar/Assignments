@@ -1,0 +1,17 @@
+{
+  "name": "price-calculator",
+  "version": "1.0.0",
+  "description": "Interview Question for SixPlus",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha app.specs.js"
+  },
+  "author": "Ayush Singhvi",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "lodash": "4.17.11"
+  }
+}
