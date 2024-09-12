@@ -21,6 +21,8 @@ const deleteUser = async (req, res) => {
   res.status(204).send();
 };
 
+
+
 module.exports = {
   getAllUsers,
   getUserById,

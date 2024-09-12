@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Debounce Example</title>
+    </head>
+    <body>
+        <button id="savebtn">Save</button>
+
+        <script>
+            function debounce (func, delay){
+                let timeout;
+
+                return function(...args){
+                    clearTimeout(timeout)
+                    timeout=setTimeout(()=>func.apply(this,args),delay)
+                }
+
+            }
+
+            function saveData(){
+                console.log("Data saved at ", new Date().toLocaleTimeString())
+            }
+            const debouncedSave=debounce(saveData,1000);
+            document.getElementById("savebtn").addEventListener("click",debouncedSave)
+        </script>
+    </body>
+</html>
