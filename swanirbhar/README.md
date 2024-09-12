@@ -20,3 +20,6 @@ This Task Management System helps users manage their tasks efficiently. It inclu
 - **Authentication**: JWT (JSON Web Tokens)
 - **AI Integration**: Custom AI service for task prioritization
 
+## Deployed Link
+--**Frontend**: [https://66e2a2b0ba2baa130a3fa8aa--eloquent-salmiakki-9b2475.netlify.app/]
+--**Backend**: [https://swanirbhar-be.onrender.com/task]
