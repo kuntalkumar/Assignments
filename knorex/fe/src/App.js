@@ -19,7 +19,7 @@ import {
 }
  from '@chakra-ui/react';
  
- import { SunIcon, MoonIcon } from '@chakra-ui/icons';
+ import { SunIcon, MoonIcon, ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import SignUpForm from './components/SighnUpForm.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation';
 import "./App.css"
@@ -143,8 +143,10 @@ console.log(Arr)
           <Thead>
             <Tr>
               <Th color={tableTextColor}>Select</Th>
-              <Th color={tableTextColor}>Full Name <span  onClick={()=>handleSortByEmail("asc")} cursor={"pointer"}> asc</span>
-              <span  onClick={()=>handleSortByEmail("desc")} cursor={"pointer"}> desc</span>
+              <Th color={tableTextColor}>Full Name 
+
+              <span  onClick={()=>handleSortByEmail("asc")}  style={{cursor:"pointer"}}> <ArrowDownIcon/></span>
+              <span  onClick={()=>handleSortByEmail("desc")}style={{cursor:"pointer"}}> <ArrowUpIcon/></span>
               </Th>
               <Th color={tableTextColor}  >Email </Th>
               <Th color={tableTextColor}>Actions</Th>
@@ -179,8 +181,11 @@ console.log(Arr)
 
                 <Td color={tableTextColor}>{user.firstName + " " + user.lastName}</Td>
 
-                <Td color={tableTextColor}>{user.email}</Td>
-                
+                <Td color={tableTextColor}>
+  <a href={`mailto:${user.email}`} target="_blank" rel="noopener noreferrer">
+    {user.email}
+  </a>
+</Td>            
                 <Td>
                   <Button 
                     colorScheme="red" 
