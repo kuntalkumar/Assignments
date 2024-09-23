@@ -6,6 +6,7 @@ import CreateTodo from './CreateTodo';
 
 const Todo = () => {
   const { val, setVal } = useContext(AppContext);
+  
 
   const handleEdit = (id, status) => {
     fetch(`https://telecrmbe.onrender.com/edit/${id}`, {
