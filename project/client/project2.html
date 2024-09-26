@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Byadarahalli Investor Presentation</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide {
+      height: 100vh;
+      box-sizing: border-box;
+      display: none;
+      overflow: auto;
+      padding: 20px;
+    }
+    .slide.active {
+      display: block;
+    }
+    h2 {
+      color: #2c3e50;
+      text-align: center;
+      margin-top: 0;
+    }
+    .content {
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .image-placeholder {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      padding: 10px;
+    }
+    .image-placeholder img {
+      max-width: 100%;
+      max-height: 350px;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .image-placeholder img:hover {
+      transform: scale(1.05);
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.01rem;
+      text-align: left;
+    }
+    ul li {
+      margin: 10px 0;
+    }
+    .nav {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      padding: 5px 15px;
+      font-size: 1.2rem;
+      margin: 0 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .nav a:hover {
+      background-color: #2c3e50;
+    }
+    @media (max-width: 768px) {
+      .content {
+        padding: 10px;
+      }
+      table,
+      th,
+      td {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .image-placeholder img {
+        max-width: 90%;
+        max-height: 250px;
+      }
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: 5% auto;
+      display: block;
+      max-width: 80%;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <div id="slide1" class="slide">
+    <h2>Competitor Analysis</h2>
+    <div class="content">
+      <ul>
+        <li>20+ competing projects identified</li>
+        <li>Price range: Rs 4000 - Rs 10000 per sq ft</li>
+      </ul>
+      <div class="image-placeholder">
+        <img src="./WhatsApp Image 2024-09-26 at 16.14.06_183966a6.jpg" alt="Competitor Analysis Image" onclick="openModal(this)" />
+      </div>
+    </div>
+    <div style="text-align: center; margin: 10px; font-size: larger;">
+      <div><a href="https://docs.google.com/spreadsheets/d/1neopY3CqeIfgqxIYvls8dV5dp0n8HyxuEhgpNHiWY1Y/edit?gid=0#gid=0">Click here for Competitor Analysis</a></div>
+      <p>Byadarahalli offers competitive pricing and superior location, setting us apart in this dynamic market.</p>
+    </div>
+  </div>
+
+  <div id="slide2" class="slide">
+    <h2>Key Infrastructure in the Vicinity</h2>
+    <div class="content">
+      <ul>
+        <li>Proximity to major highways and transportation hubs</li>
+        <li>Nearby educational institutions and healthcare facilities</li>
+        <li>Upcoming commercial and residential developments</li>
+        <li>Planned government infrastructure projects</li>
+      </ul>
+      <div class="image-placeholder">
+        <img src="./infra1.jpg" alt="Key Infrastructure" onclick="openModal(this)" />
+        <img src="./infra2.png" alt="Key Infrastructure 2" onclick="openModal(this)" />
+        <img src="./infra3.jpg" alt="Key Infrastructure 3" onclick="openModal(this)" />
+      </div>
+    </div>
+  </div>
+
+  <div id="slide3" class="slide">
+    <h2>Master Plan</h2>
+    <div class="content">
+      <div class="image-placeholder">
+        <img src="./Untitled (1).png" alt="Master Plan" onclick="openModal(this)" />
+      </div>
+    </div>
+    <div style="text-align: center; margin: 10px; font-size: larger;">
+      <p>Our carefully designed master plan ensures a balance of productivity, sustainability, and community living.</p>
+    </div>
+  </div>
+
+  <div id="slide4" class="slide active">
+    <h2>Land Marks</h2>
+    <div class="content">
+      <div class="image-placeholder">
+        <img src="./infra4.jpg" alt="Landmark Image" onclick="openModal(this)" />
+      </div>
+    </div>
+    <div style="text-align: center; margin: 10px; font-size: larger;">
+      <p>Our property is ideally located near a Foxconn landmark and a prestigious golf course.</p>
+    </div>
+  </div>
+
+  <div id="slide5" class="slide">
+    <h2>News</h2>
+    <div class="content">
+      <ul id="links">
+        <li><a href="https://www.deccanherald.com/business/foxconn-buys-300-acre-site-in-indian-tech-hub-bengaluru-1217113.html" target="_blank">Foxconn buys 300-acre site in Indian tech-hub Bengaluru</a></li>
+        <li><a href="https://www.timesnownews.com/bengaluru/karnataka-budget-2024-bengaluru-metro-expansion-plans-to-tumakuru-and-devanahalli-unveiled-satellite-cities-in-queue-article-107788815" target="_blank">Bengaluru Metro Expansion to Devanahalli unveiled in Karnataka Budget</a></li>
+        <li><a href="https://timesofindia.indiatimes.com/city/bengaluru/st-dept-gets-25-acres-near-devanahalli-for-setting-up-science-city/articleshow/108279721.cms" target="_blank">S&T dept gets 25 acres near Devanahalli for setting up Science City</a></li>
+        <li><a href="https://www.thehindu.com/news/cities/bangalore/Global-financial-district-planned-near-Devanahalli-says-Nirani/article16373308.ece" target="_blank">Global financial district planned near Devanahalli, says Nirani</a></li>
+        <li><a href="https://www.google.com/maps/d/u/0/viewer?mid=1OrcRWM3G-fLSxnA9R73pf_t8DaJU0q4&hl=en_US&ll=12.981400659106367%2C77.566661562261&z=10" target="_blank">Bangalore's Foxconn and Tech Park Locations</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="#" onclick="showSlide(1)">1</a>
+    <a href="#" onclick="showSlide(2)">2</a>
+    <a href="#" onclick="showSlide(3)">3</a>
+    <a href="#" onclick="showSlide(4)">4</a>
+    <a href="#" onclick="showSlide(5)">5</a>
+  </div>
+
+  <!-- The Modal -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image" />
+    </div>
+  </div>
+
+  <script>
+    function showSlide(slideIndex) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === slideIndex - 1);
+      });
+    }
+
+    function openModal(imgElement) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imgElement.src;
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

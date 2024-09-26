@@ -7,11 +7,9 @@
     <style>
       body,
       html {
-        margin: 0;
+        margin: 10px;
         padding: 0;
         font-family: Arial, sans-serif;
-        height: 100%;
-        overflow: hidden;
       }
       .slide {
         height: 100vh;
@@ -26,9 +24,14 @@
         text-align: center;
       }
       .content {
-        max-width: 1100px;
-        margin: 0 auto;
+        display: flex;
+        margin: auto;
         text-align: center;
+        justify-content: center;
+        gap: 10%;
+      }
+      .content div {
+        margin-top: 80px;
       }
       table {
         width: 100%;
@@ -44,16 +47,14 @@
         background-color: #f2f2f2;
       }
       .image-placeholder {
-        background-color: #e0e0e0;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
       .image-placeholder img {
         max-width: 100%;
-        max-height: 350px; /* Limit the image height */
+        max-height: 450px;
         height: auto;
         border-radius: 8px;
         transition: transform 0.3s ease;
@@ -69,6 +70,7 @@
       }
       ul li {
         margin: 10px 0;
+        font-size: larger;
       }
       .nav {
         position: fixed;
@@ -104,8 +106,48 @@
         }
         .image-placeholder img {
           max-width: 90%;
-          max-height: 250px; /* Smaller height on mobile */
+          max-height: 250px;
         }
+      }
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        margin: auto;
+        display: block;
+        object-fit: contain; /* Maintain aspect ratio */
+      }
+      .modal img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
+      }
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        color: #fff;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close:hover {
+        color: #f1f1f1;
       }
     </style>
   </head>
@@ -157,89 +199,120 @@
     <div id="slide2" class="slide">
       <h2>Competitor Analysis</h2>
       <div class="content">
+        <div>
+          <ul>
+            <li>18 competing projects identified</li>
+            <li>Price range: Rs 90 - Rs 1000 per sq ft</li>
+            <li>Project sizes: 20 - 307 acres</li>
+            <li>Our location: Strategic advantage</li>
+            <li>1 hour 22 mins from Hebbal Flyover</li>
+
+          <li><a href="https://docs.google.com/spreadsheets/d/1N1gFAnjKtH-_g6uM6hkDoBG2bL31fO_izcUIkzWeaKs/edit?gid=1680157754#gid=1680157754">Click here for Competitor Analysis</a></li>
+          </ul>
+
+        </div>
         <div class="image-placeholder">
           <img
             src="https://kelsa-clients-production.s3.ap-south-1.amazonaws.com/uploads/accounts/5/pipelines/10/files/5cdaf223-b1aa-446f-a2e6-34b533deca62/TG+Comp+Details.png"
             alt="Competitor Analysis Image"
           />
         </div>
-        <ul>
-          <li>18 competing projects identified</li>
-          <li>Price range: Rs 90 - Rs 1000 per sq ft</li>
-          <li>Project sizes: 20 - 307 acres</li>
-          <li>Our location: Strategic advantage</li>
-          <li>1 hour 22 mins from Hebbal Flyover</li>
-        </ul>
-        <p>
-          <em
-            >Riverstone offers competitive pricing and superior location,
-            setting us apart in this dynamic market.</em
-          >
-        </p>
+      </div>
+      <div style="display: flex;justify-content:center; margin:10px;font-size: larger;">
+        <div>
+          Riverstone offers competitive pricing and superior location, setting us apart in this dynamic market.
+        </div>
       </div>
     </div>
 
     <div id="slide3" class="slide">
       <h2>Key Infrastructure in the Vicinity</h2>
       <div class="content">
+        <div>
+          <ul>
+            <li>Proximity to major highways and transportation hubs</li>
+            <li>Nearby educational institutions and healthcare facilities</li>
+            <li>Upcoming commercial and residential developments</li>
+            <li>Planned government infrastructure projects</li>
+          </ul>
+        </div>
         <div class="image-placeholder">
           <img
             src="https://kelsa-clients-production.s3.ap-south-1.amazonaws.com/uploads/accounts/5/pipelines/519/files/6ad8bac1-197b-46df-88c4-110158012a8b/The+Grand+Strand+Address+%281%29.jpg"
             alt="Key Infrastructure"
           />
         </div>
-        <ul>
-          <li>Proximity to major highways and transportation hubs</li>
-          <li>Nearby educational institutions and healthcare facilities</li>
-          <li>Upcoming commercial and residential developments</li>
-          <li>Planned government infrastructure projects</li>
-        </ul>
-        <p>
-          <em
-            >The surrounding infrastructure enhances the value and potential of
-            Riverstone farm plots.</em
-          >
-        </p>
+      </div>
+      <div style="display: flex;justify-content:center; margin:10px;font-size: larger;">
+        <div>
+          The surrounding infrastructure enhances the value and potential of Riverstone farm plots.
+        </div>
       </div>
     </div>
 
     <div id="slide4" class="slide">
       <h2>Master Plan: Riverstone Managed Farm Plot Development</h2>
       <div class="content">
+        <div>
+          <ul>
+            <li>Total project area and number of plots</li>
+            <li>Common amenities and facilities</li>
+            <li>Green spaces and recreational areas</li>
+            <li>Infrastructure within the development</li>
+          </ul>
+        </div>
         <div class="image-placeholder">
           <img
             src="https://kelsa-clients-production.s3.ap-south-1.amazonaws.com/uploads/accounts/5/pipelines/519/files/e6f4b2d2-c2a6-4628-a860-ab1e42bd9e1b/WhatsApp+Image+2024-09-06+at+3.16.59+PM.jpeg"
             alt="Master Plan"
           />
         </div>
-        <ul>
-          <li>Total project area and number of plots</li>
-          <li>Common amenities and facilities</li>
-          <li>Green spaces and recreational areas</li>
-          <li>Infrastructure within the development</li>
-        </ul>
-        <p>
-          <em
-            >Our carefully designed master plan ensures a balance of
-            productivity, sustainability, and community living.</em
-          >
-        </p>
+      </div>
+      <div style="display: flex;justify-content:center; margin:10px;font-size: larger;">
+        <div>
+          Our carefully designed master plan ensures a balance of productivity, sustainability, and community living.
+        </div>
       </div>
     </div>
 
+    <!-- Modal for full-screen images -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImg" />
+    </div>
+
+    <!-- Navigation -->
     <div class="nav">
-      <a href="#slide1">1</a>
-      <a href="#slide2">2</a>
-      <a href="#slide3">3</a>
-      <a href="#slide4">4</a>
+      <a href="#slide1"> 1</a>
+      <a href="#slide2"> 2</a>
+      <a href="#slide3"> 3</a>
+      <a href="#slide4"> 4</a>
     </div>
 
     <script>
-      // Ensure the first slide is shown by default when page loads
-      const firstSlide = document.querySelector(".slide");
-      firstSlide.classList.add("active");
+      // Modal functionality
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+      const closeModal = document.querySelector(".close");
 
-      // Handle navigation
+      document.querySelectorAll(".image-placeholder img").forEach((img) => {
+        img.addEventListener("click", () => {
+          modal.style.display = "flex";
+          modalImg.src = img.src;
+        });
+      });
+
+      closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+
+      // Navigation functionality
       document.querySelectorAll(".nav a").forEach((link) => {
         link.addEventListener("click", (event) => {
           event.preventDefault();

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Riverstone Investor Presentation</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100%;
+        overflow: hidden;
+      }
+      .slide {
+        height: 100vh;
+        box-sizing: border-box;
+        display: none;
+      }
+      .slide.active {
+        display: block;
+      }
+      h2 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      .content {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .image-placeholder {
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .image-placeholder img {
+        max-width: 100%;
+        max-height: 350px;
+        height: auto;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+      .image-placeholder img:hover {
+        transform: scale(1.05);
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        font-size: 1.01rem;
+        text-align: left;
+      }
+      ul li {
+        margin: 10px 0;
+      }
+      .nav {
+        position: fixed;
+        bottom: 1px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .nav a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        font-size: 1.2rem;
+        margin: 0 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .nav a:hover {
+        background-color: #2c3e50;
+      }
+      @media (max-width: 768px) {
+        .content {
+          padding: 10px;
+        }
+        table,
+        th,
+        td {
+          font-size: 14px;
+          padding: 8px;
+        }
+        .image-placeholder img {
+          max-width: 90%;
+          max-height: 250px;
+        }
+      }
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+      .modal.active {
+        display: flex;
+      }
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="slide3" class="slide">
+      <h2>Key Infrastructure in the Vicinity</h2>
+      <div class="content">
+        <div class="image-placeholder">
+          <img
+            src="./WhatsApp Image 2024-09-26 at 17.33.42_07c2c9e7.jpg"
+            alt="Key Infrastructure"
+            class="modal-trigger"
+          />
+        </div>
+        <div>
+          <a href="https://docs.google.com/spreadsheets/d/1-R11_ptjO4E6s4IQoj4dSlfmtrEU5XAA2TtTYuzgPhw/edit?gid=0#gid=0">
+            Click here for Competitor Analysis
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="slide4" class="slide">
+      <h2>Land Sketch</h2>
+      <div class="content">
+        <div class="image-placeholder">
+          <img src="./Landsketch.jpg" alt="Land sketch" class="modal-trigger" />
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="#slide3">1</a>
+      <a href="#slide4">2</a>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+      <span class="modal-close">&times;</span>
+      <img id="modalImage" src="" alt="Modal Image" />
+    </div>
+
+    <script>
+      const firstSlide = document.querySelector(".slide");
+      firstSlide.classList.add("active");
+
+      // Navigation functionality
+      document.querySelectorAll(".nav a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          document.querySelectorAll(".slide").forEach((slide) => {
+            slide.classList.remove("active");
+          });
+
+          const slideId = event.target.getAttribute("href").replace("#", "");
+          document.getElementById(slideId).classList.add("active");
+        });
+      });
+
+      // Modal functionality
+      const modal = document.getElementById("modal");
+      const modalImage = document.getElementById("modalImage");
+      const closeModal = document.querySelector(".modal-close");
+
+      document.querySelectorAll(".modal-trigger").forEach((img) => {
+        img.addEventListener("click", (e) => {
+          modalImage.src = e.target.src;
+          modal.classList.add("active");
+        });
+      });
+
+      closeModal.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target !== modalImage) {
+          modal.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
