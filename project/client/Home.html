@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <style>
+        /* Default styles for mobile */
+        body {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        #projects {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr); /* 1 column by default */
+            gap: 10px;
+            margin: 10px;
+        }
+
+        img {
+            width: 100%; /* Make image width responsive */
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Ensures image covers the specified area */
+        }
+
+        #heading h1, h3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            font-size: 1.5rem;
+        }
+
+        #projects div {
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            padding: 5px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Tablet styles (min-width: 600px) */
+        @media (min-width: 600px) {
+            #projects {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+            }
+
+            #heading h1, h3 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Desktop styles (min-width: 1024px) */
+        @media (min-width: 1024px) {
+            #projects {
+                margin-top: 20px;
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+                gap: 20px;
+            }
+
+            #heading h1, h3 {
+                font-size: 2.5rem;
+            }
+
+            h3 {
+                width: 80%;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+   <div>
+       <div id="heading">
+           <h1>Land Parcel Details & Location Analysis</h1>
+       </div>
+
+       <div id="projects">
+           <!-- Hardcoded projects -->
+           <div onclick="window.location.href='./project1/project1.html'">
+               <img src="https://cdn.prod.website-files.com/649c855c0f07ccf3e5f7970d/6501ecea2aff7d3c50e0a0d2_iStock-123252122.jpeg" alt="Project 1">
+               <h3>River-Stone Katenhalli</h3>
+           </div>
+           <div onclick="window.location.href='./project2/project2.html'">
+               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVs0zvg50p9_AQN_7K07PDjCi5tlynh-vQ9A&s" alt="Project 2">
+               <h3>Byadarahalli</h3>
+           </div>
+           <div onclick="window.location.href='./project3/project3.html'">
+               <img src="https://hubnetwork.in/wp-content/uploads/2024/02/challenges-in-buying-residential-land_0_1200-1.jpg" alt="Project 3">
+               <h3>Poojena Agrahara</h3>
+           </div>
+       </div>
+   </div>
+
+</body>
+</html>

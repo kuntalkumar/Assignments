@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Riverstone Investor Presentation</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100%;
+        overflow: hidden;
+      }
+      .slide {
+        height: 100vh;
+        box-sizing: border-box;
+        display: none;
+      }
+      .slide.active {
+        display: block;
+      }
+      h2 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      .content {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .image-placeholder {
+        background-color: #e0e0e0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .image-placeholder img {
+        max-width: 100%;
+        max-height: 350px; /* Limit the image height */
+        height: auto;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+      }
+      .image-placeholder img:hover {
+        transform: scale(1.05);
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        font-size: 1.01rem;
+        text-align: left;
+      }
+      ul li {
+        margin: 10px 0;
+      }
+      .nav {
+        position: fixed;
+        bottom: 1px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .nav a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        font-size: 1.2rem;
+        margin: 0 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .nav a:hover {
+        background-color: #2c3e50;
+      }
+      @media (max-width: 768px) {
+        .content {
+          padding: 10px;
+        }
+        table,
+        th,
+        td {
+          font-size: 14px;
+          padding: 8px;
+        }
+        .image-placeholder img {
+          max-width: 90%;
+          max-height: 250px; /* Smaller height on mobile */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="slide1" class="slide active">
+      <h2>Investor Offer for Riverstone</h2>
+      <div class="content">
+        <table>
+          <tr>
+            <th>Aspect</th>
+            <th>Details</th>
+          </tr>
+          <tr>
+            <td>Land Purchase</td>
+            <td>
+              - Offered Land: 1 acre<br />
+              - Registration: In investor's name<br />
+              - Price: ₹1 crore per acre
+            </td>
+          </tr>
+          <tr>
+            <td>Development</td>
+            <td>
+              - We develop the land into farm plots<br />
+              - Includes infrastructure, amenities, plantation
+            </td>
+          </tr>
+          <tr>
+            <td>Marketing & Sales</td>
+            <td>We handle all marketing efforts</td>
+          </tr>
+          <tr>
+            <td>Revenue Sharing</td>
+            <td>
+              - Minimum Sales Price: ₹650 per sq ft<br />
+              - We retain ₹100 per sq ft<br />
+              - Investor receives ₹550 per sq ft<br />
+              - Above ₹650: We retain 20%, Investor 80%
+            </td>
+          </tr>
+          <tr>
+            <td>Return Potential</td>
+            <td>Potential to double investment in 1-2 years</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="slide2" class="slide">
+      <h2>Competitor Analysis</h2>
+      <div class="content">
+        <div class="image-placeholder">
+          <img
+            src="https://kelsa-clients-production.s3.ap-south-1.amazonaws.com/uploads/accounts/5/pipelines/10/files/5cdaf223-b1aa-446f-a2e6-34b533deca62/TG+Comp+Details.png"
+            alt="Competitor Analysis Image"
+          />
+        </div>
+        <ul>
+          <li>18 competing projects identified</li>
+          <li>Price range: Rs 90 - Rs 1000 per sq ft</li>
+          <li>Project sizes: 20 - 307 acres</li>
+          <li>Our location: Strategic advantage</li>
+          <li>1 hour 22 mins from Hebbal Flyover</li>
+        </ul>
+        <p>
+          <em
+            >Riverstone offers competitive pricing and superior location,
+            setting us apart in this dynamic market.</em
+          >
+        </p>
+      </div>
+    </div>
+
+    <div id="slide3" class="slide">
+      <h2>Key Infrastructure in the Vicinity</h2>
+      <div class="content">
+        <div class="image-placeholder">
+          <img
+            src="https://kelsa-clients-production.s3.ap-south-1.amazonaws.com/uploads/accounts/5/pipelines/519/files/6ad8bac1-197b-46df-88c4-110158012a8b/The+Grand+Strand+Address+%281%29.jpg"
+            alt="Key Infrastructure"
+          />
+        </div>
+        <ul>
+          <li>Proximity to major highways and transportation hubs</li>
+          <li>Nearby educational institutions and healthcare facilities</li>
+          <li>Upcoming commercial and residential developments</li>
+          <li>Planned government infrastructure projects</li>
+        </ul>
+        <p>
+          <em
+            >The surrounding infrastructure enhances the value and potential of
+            Riverstone farm plots.</em
+          >
+        </p>
+      </div>
+    </div>
+
+    <div id="slide4" class="slide">
+      <h2>Master Plan: Riverstone Managed Farm Plot Development</h2>
+      <div class="content">
+        <div class="image-placeholder">
+          <img
+            src="https://kelsa-clients-production.s3.ap-south-1.amazonaws.com/uploads/accounts/5/pipelines/519/files/e6f4b2d2-c2a6-4628-a860-ab1e42bd9e1b/WhatsApp+Image+2024-09-06+at+3.16.59+PM.jpeg"
+            alt="Master Plan"
+          />
+        </div>
+        <ul>
+          <li>Total project area and number of plots</li>
+          <li>Common amenities and facilities</li>
+          <li>Green spaces and recreational areas</li>
+          <li>Infrastructure within the development</li>
+        </ul>
+        <p>
+          <em
+            >Our carefully designed master plan ensures a balance of
+            productivity, sustainability, and community living.</em
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="#slide1">1</a>
+      <a href="#slide2">2</a>
+      <a href="#slide3">3</a>
+      <a href="#slide4">4</a>
+    </div>
+
+    <script>
+      // Ensure the first slide is shown by default when page loads
+      const firstSlide = document.querySelector(".slide");
+      firstSlide.classList.add("active");
+
+      // Handle navigation
+      document.querySelectorAll(".nav a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          document.querySelectorAll(".slide").forEach((slide) => {
+            slide.classList.remove("active");
+          });
+
+          const slideId = event.target.getAttribute("href").replace("#", "");
+          document.getElementById(slideId).classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
