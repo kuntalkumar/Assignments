@@ -7,14 +7,18 @@
     <style>
       body,
       html {
-        margin: 10px;
-        padding: 0;
-        font-family: Arial, sans-serif;
+        margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      overflow: hidden;
       }
       .slide {
         height: 100vh;
-        box-sizing: border-box;
-        display: none;
+      box-sizing: border-box;
+      display: none;
+      overflow: auto;
+      padding: 20px;
       }
       .slide.active {
         display: block;
@@ -85,7 +89,7 @@
       .nav a {
         color: white;
         text-decoration: none;
-        padding: 5px 15px;
+        padding: 10px 15px;
         font-size: 1.2rem;
         margin: 0 5px;
         border-radius: 5px;
@@ -97,6 +101,10 @@
       @media (max-width: 768px) {
         .content {
           padding: 10px;
+          flex-direction: column-reverse; 
+          /* comment out this line if like old view  */
+          
+
         }
         table,
         th,
@@ -108,6 +116,7 @@
           max-width: 90%;
           max-height: 250px;
         }
+       
       }
       /* Modal styles */
       .modal {
@@ -281,13 +290,17 @@
       <img class="modal-content" id="modalImg" />
     </div>
 
-    <!-- Navigation -->
+    
     <div class="nav">
-      <a href="#slide1"> 1</a>
-      <a href="#slide2"> 2</a>
-      <a href="#slide3"> 3</a>
-      <a href="#slide4"> 4</a>
+      <a href="#" onclick="showSlide(1)">1</a>
+      <a href="#" onclick="showSlide(2)">2</a>
+      <a href="#" onclick="showSlide(3)">3</a>
+      <a href="#" onclick="showSlide(4)">4</a>
+     
+      <a href="./Home.html"> Home</a>
+  
     </div>
+
 
     <script>
       // Modal functionality
@@ -312,18 +325,15 @@
         }
       });
 
-      // Navigation functionality
-      document.querySelectorAll(".nav a").forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          document.querySelectorAll(".slide").forEach((slide) => {
-            slide.classList.remove("active");
-          });
-
-          const slideId = event.target.getAttribute("href").replace("#", "");
-          document.getElementById(slideId).classList.add("active");
-        });
+    
+      function showSlide(slideIndex) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === slideIndex - 1);
       });
+    }
+
+      
     </script>
   </body>
 </html>

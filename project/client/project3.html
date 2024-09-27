@@ -83,8 +83,8 @@
       .nav a {
         color: white;
         text-decoration: none;
-        padding: 5px 15px;
-        font-size: 1.2rem;
+        padding: 10px 15px;
+        font-size: 1.3rem;
         margin: 0 5px;
         border-radius: 5px;
         transition: background-color 0.3s ease;
@@ -138,6 +138,68 @@
     </style>
   </head>
   <body>
+
+    <div id="slide1" class="slide active">
+      <h2>Poojan Aghara Village Land Aggregation (Whitefield Sai Baba Ashram Road)
+      </h2>
+      <div class="content">
+        <table>
+          <tr>
+            <th>Aspect</th>
+            <th>Details</th>
+          </tr>
+          <tr>
+            <td>Duration</td>
+            <td>
+              Total project timeline: 6-8 years (from handover to Brigade).
+Investment period: 6-24 months (for land purchase and change of land use).
+
+            </td>
+          </tr>
+          <tr>
+            <td>Inflow Start            </td>
+            <td>
+              Inflows start in 18-24 months from today (after change of land use and approvals).
+
+            </td>
+          </tr>
+          <tr>
+            <td>Inflow Duration</td>
+            <td>Spread across 6-7 years after project launch.
+            </td>
+          </tr>
+          <tr>
+            <td>Investment Quantum:
+            </td>
+            <td>
+              ₹100 crores (split across two phases).
+Phase 1: ₹20-25 crores for 5 acres.
+Phase 2: ₹75-80 crores for 15 acres.
+
+            </td>
+          </tr>
+          <tr>
+            <td>Expected IRR:</td>
+            <td>40-45% over the duration of the project.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>Current Status:
+            </td>
+            <td>90% of the land is already aggregated. The remaining pockets are being acquired. Brigade Enterprises is the developer (term sheet signed). Legal due diligence will be conducted by both our legal team and Brigade’s legal advisors.
+              Minimal legal and aggregation risks.
+              
+            </td>
+          </tr>
+
+
+        </table>
+      </div>
+    </div>
+
+
     <div id="slide3" class="slide">
       <h2>Key Infrastructure in the Vicinity</h2>
       <div class="content">
@@ -164,13 +226,17 @@
         </div>
       </div>
     </div>
-
+    
+    
     <div class="nav">
-      <a href="#slide3">1</a>
-      <a href="#slide4">2</a>
+      <a href="#" onclick="showSlide(1)">1</a>
+      <a href="#" onclick="showSlide(2)">2</a>
+      <a href="#" onclick="showSlide(3)">3</a>
+      
+      <a href="./Home.html"> Home</a>
+  
     </div>
 
-    <!-- Modal Structure -->
     <div id="modal" class="modal">
       <span class="modal-close">&times;</span>
       <img id="modalImage" src="" alt="Modal Image" />
@@ -180,20 +246,14 @@
       const firstSlide = document.querySelector(".slide");
       firstSlide.classList.add("active");
 
-      // Navigation functionality
-      document.querySelectorAll(".nav a").forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          document.querySelectorAll(".slide").forEach((slide) => {
-            slide.classList.remove("active");
-          });
-
-          const slideId = event.target.getAttribute("href").replace("#", "");
-          document.getElementById(slideId).classList.add("active");
-        });
+      
+      function showSlide(slideIndex) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === slideIndex - 1);
       });
+    }
 
-      // Modal functionality
       const modal = document.getElementById("modal");
       const modalImage = document.getElementById("modalImage");
       const closeModal = document.querySelector(".modal-close");
