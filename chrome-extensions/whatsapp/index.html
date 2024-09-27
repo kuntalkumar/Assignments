@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp Sender</title>
+    <!-- <link rel="icon" href="./whatsapp.svg" type="image/x-icon">  -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #25d366;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1eb954;
+        }
+
+        input[type="submit"]:active {
+            background-color: #1aa94b;
+        }
+    </style>
+</head>
+<body>
+    <form action="" onsubmit="handleSubmit(event)">
+        <input required type="number" placeholder="Enter Your Mobile number" name="" id="phoneNumber" onchange="handleInput(event)">
+        <input type="submit" value="Send" id="button">
+    </form>
+</body>
+<script>
+let number = null;
+
+let handleInput = (e) => {
+    number = e.target.value;
+}
+
+let handleSubmit = (e) => {
+    e.preventDefault();  // Prevent the form from refreshing the page
+    if (number) {
+        let whatsappUrl = `https://wa.me/${number}`;
+        window.open(whatsappUrl, '_blank', 'noopener noreferrer'); // Open WhatsApp in a new tab
+    } else {
+        alert("Please enter a valid phone number.");
+    }
+}
+</script>
+</html>
