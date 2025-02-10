@@ -6,7 +6,6 @@ const Todo = () => {
     const handleFormSubmit=(e)=>{
         e.preventDefault()
         setArr([...arr,inp])
-        console.log("object", inp)
     }
 
     const handleDelete=(i)=>{
