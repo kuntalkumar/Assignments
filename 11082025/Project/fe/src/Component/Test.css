@@ -1,0 +1,72 @@
+/* Container: centers everything */
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card style for the timer */
+.timer-card {
+  background: #fff;
+  padding: 30px 50px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Title */
+.title {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Timer display */
+.time-display {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Base button style */
+.btn {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+  color: white;
+}
+
+/* Specific button colors */
+.btn.start {
+  background: #28a745;
+}
+
+.btn.pause {
+  background: #ffc107;
+  color: #333;
+}
+
+.btn.stop {
+  background: #dc3545;
+}
+
+/* Hover effects */
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
